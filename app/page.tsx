@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-mist-cream text-forest-green">
       <Header />
-      <main className="pt-16">
+      <main>
         <SectionReveal>
           <Hero />
         </SectionReveal>

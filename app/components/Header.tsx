@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-forest-green/10 bg-transparent backdrop-blur">
+    <header className="fixed inset-x-0 top-0 z-[9999] border-b border-forest-green/10 bg-transparent backdrop-blur">
       <div className="mx-auto flex max-w-8xl items-center justify-between px-5 h-16">
         <a href="#home" className="text-sm font-semibold tracking-tight text-forest-green">
           Villa 95
