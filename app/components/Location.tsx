@@ -10,18 +10,30 @@ export default function Location() {
             Location
           </h2>
           <p className="mt-4 max-w-xl text-base leading-7 text-forest-green/80">
-            Keep this section aligned with the Booking.com listing details. Add
-            exact neighborhood, drive times, and nearby highlights.
+            Villa 95 Rangala is perfectly situated in Kandy, offering easy access to 
+            popular attractions while maintaining a peaceful retreat atmosphere. Couples 
+            particularly love the location—rating it 10/10 for a two-person trip.
           </p>
 
           <div className="mt-6 rounded-2xl border border-olive-green/20 bg-white p-5 text-sm">
             <p className="font-semibold text-forest-green">
-              Nearby highlights
+              Nearby Attractions
             </p>
             <ul className="mt-3 space-y-2 text-forest-green/80">
-              <li>• Beaches and coastal walks</li>
-              <li>• Cafes, restaurants, markets</li>
-              <li>• Day trips and viewpoints</li>
+              <li>• Victoria Reservoir Kandy Seaplane Base - 9.9 mi</li>
+              <li>• Pallekele International Cricket Stadium - 8.1 mi</li>
+              <li>• Sri Dalada Maligawa (Temple of the Tooth) - 17 mi</li>
+            </ul>
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-olive-green/20 bg-white p-5 text-sm">
+            <p className="font-semibold text-forest-green">
+              Activities
+            </p>
+            <ul className="mt-3 space-y-2 text-forest-green/80">
+              <li>• Walking tours</li>
+              <li>• Hiking trails</li>
+              <li>• Cultural site visits</li>
             </ul>
           </div>
 

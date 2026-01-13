@@ -1,18 +1,23 @@
 const highlights = [
   {
-    title: "Designed for comfort",
+    title: "Spacious Family Rooms",
     description:
-      "Open-plan living, quiet bedrooms, and plenty of shade for long afternoons.",
+      "Private bathrooms, balconies, and stunning garden or mountain views in every room.",
   },
   {
-    title: "Thoughtful details",
+    title: "Fully Equipped Kitchen",
     description:
-      "Fast Wi‑Fi, well-equipped kitchen, and spaces that feel easy to live in.",
+      "Complete kitchen facilities with washing machine, fast Wi-Fi, and all modern conveniences.",
   },
   {
-    title: "Great base",
+    title: "Dining & Leisure",
     description:
-      "Be close to beaches, cafes, and day trips—without sacrificing privacy.",
+      "Family-friendly restaurant with Chinese, British, Indian & seafood cuisines, plus a relaxing bar.",
+  },
+  {
+    title: "Perfect Location",
+    description:
+      "Loved by couples—rated 10/10 for location. Close to hiking trails and walking tours.",
   },
 ];
 
@@ -22,20 +27,23 @@ export default function About() {
       <div className="grid gap-10 md:grid-cols-2">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">
-            A villa that feels like a reset.
+            Villa 95 Rangala in Kandy
           </h2>
           <p className="mt-4 max-w-xl text-base leading-7 text-forest-green/80">
-            Villa 95 is a modern retreat built for relaxed stays—whether you're
-            traveling as a family, a small group of friends, or a couple who wants
-            extra space.
+            Experience spacious accommodations in the heart of Kandy. Villa 95 Rangala offers 
+            spacious family rooms with private bathrooms, balconies, and breathtaking garden or 
+            mountain views. Each room is thoughtfully equipped with a full kitchen, washing machine, 
+            and complimentary high-speed Wi-Fi.
           </p>
           <p className="mt-4 max-w-xl text-base leading-7 text-forest-green/80">
-            The goal is simple: clean lines, warm light, and a layout that makes
-            time slow down.
+            Enjoy our family-friendly restaurant serving delicious Chinese, British, Indian, and 
+            seafood cuisines. Relax at our bar, or dine al fresco on the terrace surrounded by our 
+            beautiful garden. With 24-hour front desk, free parking, and full-day security, your 
+            comfort and safety are our priority.
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-1">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-1">
           {highlights.map((item) => (
             <div
               key={item.title}
