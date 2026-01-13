@@ -9,7 +9,7 @@ const tiles = [
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+    <section id="gallery" className="mx-auto max-w-8xl px-5 py-16 md:py-20">
       <div className="flex items-end justify-between gap-6">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">

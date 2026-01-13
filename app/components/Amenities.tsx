@@ -16,7 +16,7 @@ export default function Amenities() {
       id="amenities"
       className="border-y border-olive-green/10 bg-earthy-taupe/20 py-16 md:py-20"
     >
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-8xl px-5">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">
