@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="border-t border-olive-green/10 bg-earthy-taupe/10 py-10">
-      <div className="mx-auto flex max-w-8xl flex-col gap-6 px-5 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-8xl flex-col gap-6 px-6 sm:px-8 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-sm font-semibold text-forest-green">
             Villa 95

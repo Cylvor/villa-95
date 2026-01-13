@@ -4,7 +4,7 @@ export default function Location() {
       id="location"
       className="border-t border-olive-green/10 py-16 md:py-20"
     >
-      <div className="mx-auto grid max-w-8xl gap-10 px-5 md:grid-cols-2 md:items-start">
+      <div className="mx-auto grid max-w-8xl gap-10 px-6 sm:px-8 md:grid-cols-2 md:items-start">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">
             Location

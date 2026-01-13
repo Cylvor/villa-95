@@ -14,7 +14,7 @@ export default function Hero() {
         </video>
       </div>
 
-      <div className="mx-auto w-full max-w-8xl px-5 py-20" aria-hidden="true" />
+      <div className="mx-auto w-full max-w-8xl px-6 sm:px-8 py-20" aria-hidden="true" />
 
       {/* Large branded text in bottom-left */}
       <div className="absolute z-20 bottom-4 left-4 sm:bottom-6 sm:left-8 text-[18vw] sm:text-[13vw] leading-none font-extrabold text-white uppercase hero-prata pointer-events-none">

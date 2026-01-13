@@ -23,7 +23,7 @@ const highlights = [
 
 export default function About() {
   return (
-    <section id="about" className="mx-auto max-w-8xl px-5 py-16 md:py-20">
+    <section id="about" className="mx-auto max-w-8xl px-6 sm:px-8 py-16 md:py-20">
       <div className="grid gap-10 md:grid-cols-2">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">

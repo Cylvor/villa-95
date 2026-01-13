@@ -61,7 +61,7 @@ export default function Destinations() {
       id="destinations"
       className="border-t border-olive-green/10 bg-mist-cream py-16 md:py-20"
     >
-      <div className="mx-auto max-w-8xl px-5">
+      <div className="mx-auto max-w-8xl px-6 sm:px-8">
         <div className="text-center">
           <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">
             Nearby Destinations
