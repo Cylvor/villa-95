@@ -1,26 +1,26 @@
 const amenities = [
-  "Free Wi-Fi",
-  "Family rooms",
-  "Free parking",
-  "Restaurant",
-  "Non-smoking rooms",
-  "Room service",
-  "24-hour front desk",
-  "Garden",
-  "Bar",
-  "Breakfast",
-  "Waterpark",
-  "Private bathrooms",
-  "Balconies",
-  "Full kitchen",
-  "Washing machine",
-  "Terrace",
-  "Outdoor dining",
-  "Bicycle parking",
-  "Breakfast in room",
-  "Full-day security",
-  "Mountain views",
-  "Garden views",
+  { label: "Free Wi-Fi", icon: "📶" },
+  { label: "Family rooms", icon: "🛏️" },
+  { label: "Free parking", icon: "🅿️" },
+  { label: "Restaurant", icon: "🍽️" },
+  { label: "Non-smoking rooms", icon: "🚭" },
+  { label: "Room service", icon: "🛎️" },
+  { label: "24-hour front desk", icon: "🕘" },
+  { label: "Garden", icon: "🌿" },
+  { label: "Bar", icon: "🍹" },
+  { label: "Breakfast", icon: "🥐" },
+  { label: "Waterpark", icon: "💦" },
+  { label: "Private bathrooms", icon: "🚿" },
+  { label: "Balconies", icon: "🌅" },
+  { label: "Full kitchen", icon: "🍳" },
+  { label: "Washing machine", icon: "🧺" },
+  { label: "Terrace", icon: "🪴" },
+  { label: "Outdoor dining", icon: "🌤️" },
+  { label: "Bicycle parking", icon: "🚲" },
+  { label: "Breakfast in room", icon: "🛌🍳" },
+  { label: "Full-day security", icon: "🛡️" },
+  { label: "Mountain views", icon: "🏔️" },
+  { label: "Garden views", icon: "🌳" },
 ];
 
 export default function Amenities() {
@@ -29,16 +29,14 @@ export default function Amenities() {
       id="amenities"
       className="border-y border-olive-green/10 bg-earthy-taupe/20 py-16 md:py-20"
     >
-      <div className="mx-auto max-w-8xl px-5">
-        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">
-              Amenities
-            </h2>
-            <p className="mt-2 max-w-xl text-base leading-7 text-forest-green/80">
-              Everything you need for a comfortable stay.
-            </p>
-          </div>
+      <div className="mx-auto max-w-8xl px-6 sm:px-8">
+        <div className="flex flex-col items-center gap-4 text-center">
+          <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">
+            Amenities
+          </h2>
+          <p className="max-w-xl text-base leading-7 text-forest-green/80">
+            Everything you need for a comfortable stay.
+          </p>
           <a
             href="https://www.booking.com/"
             target="_blank"
@@ -52,10 +50,13 @@ export default function Amenities() {
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {amenities.map((a) => (
             <div
-              key={a}
-              className="rounded-2xl border border-olive-green/20 bg-white p-4 text-sm text-forest-green"
+              key={a.label}
+              className="flex items-start gap-2 rounded-2xl border border-olive-green/20 bg-white p-4 text-sm text-forest-green"
             >
-              {a}
+              <span aria-hidden="true" className="text-lg leading-none">
+                {a.icon}
+              </span>
+              <span className="leading-6">{a.label}</span>
             </div>
           ))}
         </div>
