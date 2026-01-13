@@ -67,7 +67,7 @@ export default function Header() {
         <div
           className={`flex items-center transition-all duration-300 ${
             isScrolled
-              ? "h-14 border-b border-olive-green/10"
+              ? "h-16 border-b border-olive-green/10"
               : "h-16 mt-5 rounded-2xl border border-olive-green/20 backdrop-blur-md shadow-lg px-4 sm:px-6"
           }`}
         >
@@ -121,7 +121,7 @@ export default function Header() {
               rel="noopener noreferrer"
               className={`inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-300 ${
                 isScrolled
-                  ? "h-9 bg-sunlit-amber px-4 text-sm text-white hover:bg-sunlit-amber/90"
+                  ? "h-10 bg-sunlit-amber px-4 text-sm text-white hover:bg-sunlit-amber/90"
                   : "h-10 bg-sunlit-amber px-5 text-sm text-white hover:bg-sunlit-amber/90 shadow-sm"
               }`}
             >
