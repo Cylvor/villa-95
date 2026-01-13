@@ -1,5 +1,6 @@
 import About from "./components/About";
 import Amenities from "./components/Amenities";
+import CustomCursor from "./components/CustomCursor";
 import Destinations from "./components/Destinations";
 import Footer from "./components/Footer";
 import Gallery from "./components/Gallery";
@@ -13,6 +14,7 @@ import SectionReveal from "./components/SectionReveal";
 export default function Home() {
   return (
     <div className="min-h-screen bg-mist-cream text-forest-green">
+      <CustomCursor />
       <Header />
       <main>
         <SectionReveal>

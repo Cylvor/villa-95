@@ -66,3 +66,50 @@ h1, h2, h3, h4, h5, h6 {
 .animate-marquee {
   animation: marquee 40s linear infinite;
 }
+
+/* Custom Cursor Styles */
+* {
+  cursor: none !important;
+}
+
+/* Allow default cursor on inputs and text areas */
+input, textarea, select {
+  cursor: text !important;
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background-color: #000000;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+}
+
+.custom-cursor-text {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99997;
+  transform: translate(-50%, -50%);
+  animation: rotateCursorText 10s linear infinite;
+}
+
+@keyframes rotateCursorText {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.cursor-rotating-text {
+  fill: #2C5F2D;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: Arial, sans-serif;
+}
