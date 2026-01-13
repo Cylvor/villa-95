@@ -23,6 +23,9 @@
   /* Accent Colors */
   --color-sunlit-amber: #D4A35D;
   --color-sky-blue: #78AADB;
+
+  /* Deep accent for header button/pills */
+  --color-rich-brown: #4E4036;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -45,5 +48,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero-specific: apply Prata to all text inside the hero section */
 .hero-prata {
+  font-family: var(--font-prata), var(--font-geist-sans), serif;
+}
+
+/* Brand utility: use Prata for branded elements (logo, headings) */
+.brand-font {
   font-family: var(--font-prata), var(--font-geist-sans), serif;
 }
