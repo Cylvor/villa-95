@@ -9,7 +9,7 @@ import SectionReveal from "./components/SectionReveal";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
+    <div className="min-h-screen bg-mist-cream text-forest-green">
       <Header />
       <main>
         <SectionReveal>
