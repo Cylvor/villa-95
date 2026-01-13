@@ -46,7 +46,7 @@ export default function CustomCursor() {
     <>
       {/* Main cursor dot */}
       <div
-        className="custom-cursor-dot"
+        className={`custom-cursor-dot ${isPointer ? "cursor-hover" : ""}`}
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
@@ -55,7 +55,7 @@ export default function CustomCursor() {
 
       {/* Rotating text around cursor */}
       <div
-        className="custom-cursor-text"
+        className={`custom-cursor-text ${isPointer ? "cursor-hover" : ""}`}
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
