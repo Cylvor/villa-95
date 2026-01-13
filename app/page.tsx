@@ -1,5 +1,6 @@
 import About from "./components/About";
 import Amenities from "./components/Amenities";
+import Destinations from "./components/Destinations";
 import Footer from "./components/Footer";
 import Gallery from "./components/Gallery";
 import Header from "./components/Header";
@@ -23,6 +24,9 @@ export default function Home() {
         </SectionReveal>
         <SectionReveal>
           <Gallery />
+        </SectionReveal>
+        <SectionReveal>
+          <Destinations />
         </SectionReveal>
         <SectionReveal>
           <Location />
