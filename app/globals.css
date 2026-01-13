@@ -10,6 +10,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Primary Base Colors */
+  --color-forest-green: #2C5F2D;
+  --color-earthy-taupe: #B7AFA3;
+  --color-mist-cream: #F4F1EB;
+
+  /* Complementary Nature Tones */
+  --color-olive-green: #A3BFA2;
+  --color-warm-brown: #8B5E3C;
+
+  /* Accent Colors */
+  --color-sunlit-amber: #D4A35D;
+  --color-sky-blue: #78AADB;
 }
 
 @media (prefers-color-scheme: dark) {
