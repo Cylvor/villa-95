@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Gallery from "./components/Gallery";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import HouseRules from "./components/HouseRules";
 import Location from "./components/Location";
 import ScrollingText from "./components/ScrollingText";
 import SectionReveal from "./components/SectionReveal";
@@ -32,6 +33,9 @@ export default function Home() {
         </SectionReveal>
         <SectionReveal>
           <Location />
+        </SectionReveal>
+        <SectionReveal>
+          <HouseRules />
         </SectionReveal>
       </main>
       <Footer />
