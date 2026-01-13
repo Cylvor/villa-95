@@ -1,4 +1,9 @@
 export default function Location() {
+  const mapQuery = "Villa 95   Rangala, Kandy, Sri Lanka";
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+    mapQuery
+  )}&z=14&output=embed`;
+
   return (
     <section
       id="location"
@@ -48,10 +53,30 @@ export default function Location() {
         </div>
 
         <div className="rounded-3xl border border-olive-green/20 bg-earthy-taupe/10 p-6">
-          <div className="aspect-[16/10] w-full rounded-2xl border border-sky-blue/30 bg-gradient-to-br from-sky-blue/20 to-olive-green/20" />
-          <p className="mt-4 text-xs text-warm-brown">
-            Replace this block with a map embed later (Google Maps / Mapbox).
-          </p>
+          <div className="aspect-[16/10] w-full overflow-hidden rounded-2xl border border-sky-blue/30 bg-white">
+            <iframe
+              title="Villa 95 location map"
+              src={mapSrc}
+              className="h-full w-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+
+          <div className="mt-4 flex items-center justify-between gap-3">
+            <p className="text-xs text-warm-brown">{mapQuery}</p>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                mapQuery
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-forest-green underline underline-offset-4 hover:text-forest-green/80"
+            >
+              View on Google Maps
+            </a>
+          </div>
         </div>
       </div>
     </section>
