@@ -6,6 +6,7 @@ import Gallery from "./components/Gallery";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Location from "./components/Location";
+import ScrollingText from "./components/ScrollingText";
 import SectionReveal from "./components/SectionReveal";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
         <SectionReveal>
           <About />
         </SectionReveal>
+        <ScrollingText />
         <SectionReveal>
           <Amenities />
         </SectionReveal>
