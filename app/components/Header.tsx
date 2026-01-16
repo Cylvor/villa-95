@@ -4,41 +4,47 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Header() {
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const sections = ["home", "about", "amenities", "gallery", "location", "destinations"];
-    
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
+        // Choose the entry with the largest intersectionRatio (fallback even when none are "isIntersecting")
+        const sorted = entries.slice().sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (sorted.length === 0) return;
+        const topId = sorted[0].target.id;
+        // If we're near the top of the page (hero), ignore observer changes on initial load
+        if (typeof window !== "undefined" && window.scrollY < 120) {
+          setActiveSection("");
+          return;
+        }
+        // Don't mark anything when we're in the `home` (hero) section
+        if (topId === "home") setActiveSection("");
+        else setActiveSection(topId);
       },
-      { threshold: 0.3, rootMargin: "-80px 0px -50% 0px" }
+      { threshold: [0.25, 0.5, 0.75], rootMargin: "-100px 0px -50% 0px" }
     );
 
     sections.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 40);
+      // Clear active section when near the top (in hero)
+      if (window.scrollY < 120) setActiveSection("");
     };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check initial scroll position
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const navItems = [
@@ -50,84 +56,65 @@ export default function Header() {
   ];
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-[9999] transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/80 backdrop-blur-md shadow-md"
-          : "bg-transparent"
-      }`}
-    >
+    <header className="fixed inset-x-0 top-0 z-[9999]">
       <div
         className={`mx-auto transition-all duration-300 ${
-          isScrolled
-            ? "max-w-full px-4 sm:px-6"
-            : "max-w-6xl px-4 sm:px-6"
+          isScrolled ? "max-w-full px-4 sm:px-6" : "max-w-6xl px-4 sm:px-6"
         }`}
       >
         <div
-          className={`flex items-center transition-all duration-300 ${
+          className={`mt-4 flex items-center justify-between transition-all duration-300 rounded-2xl px-5 text-white ${
             isScrolled
-              ? "h-16 border-b border-olive-green/10"
-              : "h-16 mt-5 rounded-2xl border border-olive-green/20 backdrop-blur-md shadow-lg px-4 sm:px-6"
+              ? "h-16 bg-white/10 backdrop-blur-xl shadow-sm border border-white/10"
+              : "h-16 bg-transparent backdrop-blur-xl shadow-none border border-transparent"
           }`}
         >
-          {/* Left Side - Logo */}
-          <div className="flex-shrink-0">
-            <a
-              href="#home"
-              className="inline-flex items-center justify-center transition-all duration-300"
+          {/* Logo */}
+          <a href="#home" className="flex items-center gap-2">
+            <div
+              className={`relative transition-all duration-300 ${
+                isScrolled ? "w-9 h-9" : "w-11 h-11"
+              }`}
             >
-              <div className={`relative transition-all duration-300 ${
-                isScrolled ? "w-10 h-10" : "w-12 h-12"
-              }`}>
-                <Image
-                  src="/logo_villa.png"
-                  alt="Villa 95 Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-            </a>
-          </div>
+              <Image
+                src="/logo_villa.png"
+                alt="Villa 95"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </a>
 
-          {/* Center - Navigation Links */}
-          <div className="flex-1 flex justify-center">
-            <nav className="hidden items-center gap-2 text-base md:flex">
-              {navItems.map((item) => (
+          {/* Navigation */}
+          <nav className="hidden md:flex items-center gap-1 rounded-full bg-transparent p-1">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.slice(1);
+              return (
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`relative px-3 py-2 transition-all duration-200 rounded-lg text-white ${
-                    activeSection === item.href.slice(1)
-                      ? "font-semibold opacity-100"
-                      : "opacity-80 hover:opacity-100"
+                  className={`relative px-4 py-2 text-sm rounded-full transition-all duration-200 ${
+                    isActive
+                      ? "bg-white/20 text-white shadow-sm font-medium"
+                      : "text-white/90 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   {item.label}
-                  {activeSection === item.href.slice(1) && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-sunlit-amber rounded-full transition-all duration-300" />
-                  )}
                 </a>
-              ))}
-            </nav>
-          </div>
+              );
+            })}
+          </nav>
 
-          {/* Right Side - Button */}
-          <div className="flex-shrink-0">
-            <a
-              href="https://www.booking.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-300 ${
-                isScrolled
-                  ? "h-10 bg-sunlit-amber px-4 text-sm text-white hover:bg-sunlit-amber/90"
-                  : "h-10 bg-sunlit-amber px-5 text-sm text-white hover:bg-sunlit-amber/90 shadow-sm"
-              }`}
-            >
-              Book Now
-            </a>
-          </div>
+          {/* CTA */}
+          <a
+            href="https://www.booking.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center h-10 px-5 rounded-full bg-sunlit-amber text-white text-sm font-semibold shadow-md transition-all duration-300 hover:bg-sunlit-amber/90 hover:scale-[1.02]"
+          >
+            Book Now
+          </a>
         </div>
       </div>
     </header>
