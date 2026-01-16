@@ -12,6 +12,8 @@ import HouseRules from "./components/HouseRules";
 import Location from "./components/Location";
 import ScrollingText from "./components/ScrollingText";
 import SectionReveal from "./components/SectionReveal";
+import Reviews from "./components/Reviews";
+import FAQ from "./components/FAQ";
 
 export default function Home() {
   return (
@@ -42,11 +44,18 @@ export default function Home() {
           <Destinations />
         </SectionReveal>
         <SectionReveal>
+          <Reviews />
+        </SectionReveal>
+        <SectionReveal>
+          <FAQ />
+        </SectionReveal>
+        <SectionReveal>
           <Location />
         </SectionReveal>
         <SectionReveal>
           <HouseRules />
         </SectionReveal>
+        
       </main>
       <Footer />
     </div>

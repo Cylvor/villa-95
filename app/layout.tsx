@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Merriweather } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "./components/SmoothScroll"; // Import the smooth scroll component
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,13 +16,13 @@ const geistMono = Geist_Mono({
 const merriweather = Merriweather({
   variable: "--font-merriweather",
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
+  weight: ["300", "400", "700", "900"], // Added 300 (Light) as used in your designs
 });
 
 export const metadata: Metadata = {
-  title: "Villa 95",
+  title: "Villa 95 | Rangala",
   description:
-    "A modern villa landing page with amenities, gallery, and Booking.com link.",
+    "A private sanctuary above the clouds in the Knuckles Mountain Range, Sri Lanka.",
 };
 
 export default function RootLayout({
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${merriweather.variable} antialiased`}
       >
+        <SmoothScroll /> {/* Initializes the smooth scroll logic */}
         {children}
       </body>
     </html>
