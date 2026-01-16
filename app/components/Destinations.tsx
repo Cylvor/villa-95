@@ -1,368 +1,216 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import Image from 'next/image';
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import gsap from "gsap";
+import { ArrowUpRight, MapPin } from "lucide-react";
 
 const destinations = [
   {
-    name: "Knuckles Five Peak Mountains",
-    description: "Iconic mountain range with breathtaking peaks and hiking trails",
+    id: 1,
+    name: "Knuckles Five Peaks",
+    description: "Iconic mountain range with breathtaking peaks and trails.",
     image: "/5 peak.jpg",
-    category: "Mountain"
+    category: "HIKING",
   },
   {
+    id: 2,
     name: "Rangala Natural Pool",
-    description: "Crystal-clear natural pool surrounded by lush greenery",
+    description: "Crystal-clear natural pool surrounded by lush greenery.",
     image: "/rangala natural pool.jpg",
-    category: "Water"
+    category: "SWIMMING",
   },
   {
-    name: "Thunhisgala Mountain",
-    description: "Majestic mountain peak with panoramic views",
+    id: 3,
+    name: "Thunhisgala Peak",
+    description: "Majestic mountain peak offering panoramic valley views.",
     image: "/thunhisgala.jpg",
-    category: "Mountain"
+    category: "HIKING",
   },
   {
+    id: 4,
     name: "Meemure Village",
-    description: "Traditional village nestled in the Knuckles range",
+    description: "Traditional isolated village nestled deep in the Knuckles.",
     image: "/meemure.jpeg",
-    category: "Village"
+    category: "CULTURE",
   },
   {
+    id: 5,
     name: "Jodu Falls",
-    description: "Hidden waterfall paradise for nature lovers",
+    description: "A hidden double waterfall paradise for nature lovers.",
     image: "/jodu falls.jpeg",
-    category: "Waterfall"
+    category: "WATERFALL",
   },
   {
+    id: 6,
     name: "Saaree Falls",
-    description: "Serene waterfall with pristine swimming spots",
+    description: "Serene waterfall with pristine swimming spots.",
     image: "/saaree falls.jpeg",
-    category: "Waterfall"
+    category: "WATERFALL",
   },
   {
+    id: 7,
     name: "Huluganga Falls",
-    description: "Powerful cascading waterfall in a scenic gorge",
+    description: "Powerful cascading waterfall in a scenic gorge.",
     image: "/huluganga falls.jpg.jpeg",
-    category: "Waterfall"
+    category: "WATERFALL",
   },
   {
+    id: 8,
     name: "Heeloya Village",
-    description: "Charming village with authentic rural experience",
+    description: "Charming village offering an authentic rural experience.",
     image: "/heeloya.jpg",
-    category: "Village"
+    category: "CULTURE",
   },
   {
+    id: 9,
     name: "Corbet's Gap",
-    description: "Scenic mountain pass with stunning valley views",
+    description: "Scenic mountain pass with stunning wind-swept views.",
     image: "/corbets gap.jpeg",
-    category: "Mountain"
+    category: "VIEWPOINT",
   },
 ];
 
 export default function Destinations() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const slideshowRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const previousIndexRef = useRef<number>(0);
+  const [activeId, setActiveId] = useState(1);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const fadeRef = useRef<HTMLDivElement>(null);
+
+  const activeDestination = destinations.find((d) => d.id === activeId) || destinations[0];
 
   useEffect(() => {
-    // Initialize cards off-screen
-    cardsRef.current.forEach((card, index) => {
-      if (card) {
-        gsap.set(card, {
-          opacity: index === 0 ? 1 : 0,
-          scale: index === 0 ? 1 : 0.8,
-          x: index === 0 ? 0 : 100,
-          rotationY: index === 0 ? 0 : 15,
-        });
-      }
+    if (!imageRef.current || !fadeRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Flash effect (white flash for light theme)
+      gsap.fromTo(
+        fadeRef.current,
+        { opacity: 1 },
+        { opacity: 0, duration: 0.6, ease: "power2.out" }
+      );
+
+      // Slight scale effect
+      gsap.fromTo(
+        imageRef.current,
+        { scale: 1.05 },
+        { scale: 1, duration: 1.2, ease: "power2.out" }
+      );
     });
 
-    // Auto-advance slideshow
-    const startSlideshow = () => {
-      intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % destinations.length);
-      }, 5000); // Change slide every 5 seconds
-    };
-
-    startSlideshow();
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-      if (timelineRef.current) {
-        timelineRef.current.kill();
-      }
-    };
-  }, []);
-
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % destinations.length);
-    // Reset auto-advance timer
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    intervalRef.current = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % destinations.length);
-    }, 5000);
-  };
-
-  const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + destinations.length) % destinations.length);
-    // Reset auto-advance timer
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    intervalRef.current = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % destinations.length);
-    }, 5000);
-  };
-
-  useEffect(() => {
-    // Animate transition when currentIndex changes
-    if (cardsRef.current.length === 0) return;
-
-    const currentCard = cardsRef.current[currentIndex];
-    const previousIndex = previousIndexRef.current;
-    const previousCard = cardsRef.current[previousIndex];
-
-    // Determine direction (forward or backward)
-    let isForward = true;
-    if (previousIndex !== undefined) {
-      if (currentIndex === 0 && previousIndex === destinations.length - 1) {
-        isForward = true; // Wrapped around forward
-      } else if (currentIndex === destinations.length - 1 && previousIndex === 0) {
-        isForward = false; // Wrapped around backward
-      } else {
-        isForward = currentIndex > previousIndex;
-      }
-    }
-
-    if (timelineRef.current) {
-      timelineRef.current.kill();
-    }
-
-    const tl = gsap.timeline();
-    timelineRef.current = tl;
-
-    // Animate out previous card
-    if (previousCard && previousIndex !== currentIndex) {
-      tl.to(previousCard, {
-        opacity: 0,
-        scale: 0.8,
-        x: isForward ? -100 : 100,
-        rotationY: isForward ? -15 : 15,
-        duration: 1,
-        ease: "power3.inOut",
-      }, 0);
-    }
-
-    // Animate in current card
-    if (currentCard) {
-      // Reset position for smooth entry
-      gsap.set(currentCard, {
-        opacity: 0,
-        scale: 0.8,
-        x: isForward ? 100 : -100,
-        rotationY: isForward ? 15 : -15,
-      });
-
-      tl.to(currentCard, {
-        opacity: 1,
-        scale: 1,
-        x: 0,
-        rotationY: 0,
-        duration: 1,
-        ease: "power3.inOut",
-      }, 0.2);
-
-      // Subtle parallax effect on image
-      const image = currentCard.querySelector('.slide-image');
-      if (image) {
-        tl.to(image, {
-          scale: 1.1,
-          duration: 1.2,
-          ease: "power2.out",
-        }, 0.2);
-      }
-    }
-
-    // Hide all other cards
-    cardsRef.current.forEach((card, index) => {
-      if (card && index !== currentIndex && index !== previousIndex) {
-        gsap.set(card, {
-          opacity: 0,
-          scale: 0.8,
-          x: index < currentIndex ? -100 : 100,
-          rotationY: index < currentIndex ? -15 : 15,
-        });
-      }
-    });
-
-    // Update previous index
-    previousIndexRef.current = currentIndex;
-  }, [currentIndex]);
+    return () => ctx.revert();
+  }, [activeId]);
 
   return (
     <section
       id="destinations"
-      className="relative h-screen w-full overflow-hidden border-t border-olive-green/10 bg-mist-cream"
+      // Added min-h to ensure enough scroll space
+      className="relative w-full bg-stone-50 px-6 py-24 md:px-12 md:py-32 text-stone-900"
     >
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-forest-green/5 via-transparent to-sky-blue/5 pointer-events-none z-0" />
-
-      {/* Content container */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 sm:px-8">
-        {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl font-semibold tracking-tight text-forest-green sm:text-4xl md:text-5xl">
-            Nearby Destinations
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-base leading-7 text-forest-green/80 sm:text-lg">
-            Discover the natural wonders and cultural treasures surrounding Villa 95 Rangala.
+      <div className="mx-auto max-w-7xl">
+        
+        {/* --- Header --- */}
+        <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-stone-200 pb-8">
+          <div>
+            <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
+              Explore the Surroundings
+            </span>
+            <h2 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900">
+              Beyond the <br /> Villa Walls
+            </h2>
+          </div>
+          <p className="max-w-xs text-sm text-stone-500 leading-relaxed pb-2">
+            Discover the raw beauty of the Knuckles Mountain Range, from hidden waterfalls to ancient villages.
           </p>
         </div>
 
-        {/* Slideshow container */}
-        <div 
-          ref={slideshowRef}
-          className="relative w-full max-w-5xl h-[60vh] flex items-center justify-center perspective-1000"
-        >
-          {/* Left Navigation Button */}
-          <button
-            onClick={goToPrevious}
-            className="absolute left-0 md:-left-12 z-20 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/90 backdrop-blur-sm border border-olive-green/20 shadow-lg hover:bg-white hover:shadow-xl transition-all duration-300 hover:scale-110 group"
-            aria-label="Previous slide"
-          >
-            <svg
-              className="w-6 h-6 md:w-7 md:h-7 text-forest-green group-hover:text-forest-green/80 transition-colors"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          {/* Right Navigation Button */}
-          <button
-            onClick={goToNext}
-            className="absolute right-0 md:-right-12 z-20 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/90 backdrop-blur-sm border border-olive-green/20 shadow-lg hover:bg-white hover:shadow-xl transition-all duration-300 hover:scale-110 group"
-            aria-label="Next slide"
-          >
-            <svg
-              className="w-6 h-6 md:w-7 md:h-7 text-forest-green group-hover:text-forest-green/80 transition-colors"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
-          {destinations.map((destination, index) => (
-            <div
-              key={destination.name}
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <div
-                ref={(el) => {
-                  cardsRef.current[index] = el;
-                }}
-                className="relative w-full max-w-4xl h-full transform-style-preserve-3d slide-wrapper"
-              >
-                <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-olive-green/20 bg-white transform-gpu slide-card">
-                  {/* Image Container */}
-                  <div className="relative w-full h-full overflow-hidden rounded-xl">
-                    <Image
-                      src={destination.image}
-                      alt={destination.name}
-                      fill
-                      className="slide-image object-cover"
-                      priority={index === 0}
-                      sizes="100vw"
-                    />
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-forest-green/90 via-forest-green/40 to-transparent rounded-xl" />
+        {/* --- Main Content Layout --- */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+          
+          {/* --- LEFT COLUMN: Scrollable List --- */}
+          {/* We remove h-full constraints so this column grows naturally with content */}
+          <div className="order-2 lg:order-1 lg:w-5/12 w-full">
+            <div className="flex flex-col">
+              {destinations.map((item) => (
+                <button
+                  key={item.id}
+                  onMouseEnter={() => setActiveId(item.id)}
+                  onClick={() => setActiveId(item.id)}
+                  // Added ample py-8 to make the list tall enough to scroll nicely against the sticky image
+                  className={`group relative flex items-center justify-between py-8 transition-all duration-300 border-b border-stone-200 ${
+                    activeId === item.id 
+                      ? "opacity-100 pl-4 bg-stone-100/50 rounded-lg -mx-2 px-6" 
+                      : "opacity-40 hover:opacity-100 hover:pl-2"
+                  }`}
+                >
+                  {/* Indicator Dot */}
+                  {activeId === item.id && (
+                    <span className="absolute left-2 h-1.5 w-1.5 rounded-full bg-emerald-600" />
+                  )}
+                  
+                  <div className="text-left">
+                    <span className="mb-1 block text-[10px] font-bold uppercase tracking-widest text-emerald-700">
+                      {item.category}
+                    </span>
+                    <h3 className="text-2xl md:text-3xl font-light text-stone-900">
+                      {item.name}
+                    </h3>
                   </div>
 
-                  {/* Content Overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12 text-white rounded-xl">
-                    <div className="max-w-2xl">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white border border-white/30">
-                          {destination.category}
-                        </span>
-                      </div>
-                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 leading-tight">
-                        {destination.name}
-                      </h3>
-                      <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-                        {destination.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  <ArrowUpRight 
+                    className={`h-5 w-5 transition-transform duration-300 ${
+                        activeId === item.id 
+                        ? "text-emerald-600 rotate-45" 
+                        : "text-stone-400 group-hover:text-stone-900"
+                    }`} 
+                  />
+                </button>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Slide indicators */}
-        <div className="flex gap-2 mt-8">
-          {destinations.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setCurrentIndex(index);
-                // Reset auto-advance timer
-                if (intervalRef.current) {
-                  clearInterval(intervalRef.current);
-                }
-                intervalRef.current = setInterval(() => {
-                  setCurrentIndex((prev) => (prev + 1) % destinations.length);
-                }, 5000);
-              }}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex
-                  ? 'w-8 bg-forest-green'
-                  : 'w-2 bg-forest-green/30 hover:bg-forest-green/50'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+          {/* --- RIGHT COLUMN: Sticky Image --- */}
+          {/* sticky top-32 ensures it pins to the top while you scroll the list on the left */}
+          <div className="order-1 lg:order-2 lg:w-7/12 w-full lg:sticky lg:top-32 h-[50vh] lg:h-[75vh]">
+            <div className="relative h-full w-full overflow-hidden rounded-sm bg-stone-200 shadow-lg">
+                
+                {/* The Image */}
+                <div ref={imageRef} className="relative h-full w-full">
+                    <Image
+                        key={activeDestination.image}
+                        src={activeDestination.image}
+                        alt={activeDestination.name}
+                        fill
+                        className="object-cover transition-opacity duration-500"
+                        priority
+                    />
+                    
+                    {/* Gradient for Text Readability (Still dark at bottom for white text) */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90" />
+                </div>
+
+                {/* Flash Layer (White for light theme) */}
+                <div ref={fadeRef} className="absolute inset-0 bg-stone-50 pointer-events-none" />
+
+                {/* Info Card Overlay */}
+                <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full">
+                    <div className="flex items-center gap-2 text-emerald-400 mb-2">
+                        <MapPin className="h-4 w-4" />
+                        <span className="text-xs font-mono uppercase tracking-widest text-white/90">
+                            {activeDestination.name}
+                        </span>
+                    </div>
+                    <p className="text-lg md:text-xl font-light text-white leading-snug max-w-md drop-shadow-md">
+                        {activeDestination.description}
+                    </p>
+                </div>
+
+                {/* Corner Decoration */}
+                <div className="absolute top-6 right-6 h-12 w-12 border-t border-r border-white/30" />
+            </div>
+          </div>
+
         </div>
       </div>
-
-      <style jsx>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        .transform-style-preserve-3d {
-          transform-style: preserve-3d;
-        }
-        .transform-gpu {
-          transform: translateZ(0);
-          will-change: transform, opacity;
-        }
-        .slide-wrapper {
-          will-change: transform, opacity;
-        }
-        .slide-card {
-          border-radius: 0.75rem;
-          -webkit-mask-image: -webkit-radial-gradient(white, white);
-          mask-image: radial-gradient(white, white);
-          backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
-          isolation: isolate;
-          transform: translateZ(0);
-        }
-      `}</style>
     </section>
   );
 }
