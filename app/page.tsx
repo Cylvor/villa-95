@@ -1,5 +1,7 @@
 import About from "./components/About";
 import Amenities from "./components/Amenities";
+import Dining from "./components/dining";
+import Rooms from "./components/rooms";
 import CustomCursor from "./components/CustomCursor";
 import Destinations from "./components/Destinations";
 import Footer from "./components/Footer";
@@ -23,10 +25,16 @@ export default function Home() {
         <SectionReveal>
           <About />
         </SectionReveal>
-        <ScrollingText />
+        <SectionReveal>
+          <Rooms />
+        </SectionReveal>
+        <SectionReveal>
+          <Dining />
+        </SectionReveal>
         <SectionReveal>
           <Amenities />
         </SectionReveal>
+        <ScrollingText />
         <SectionReveal>
           <Gallery />
         </SectionReveal>
