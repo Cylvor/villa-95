@@ -1,82 +1,131 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MapPin, Navigation, Clock, Car } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Location() {
-  const mapQuery = "Villa 95   Rangala, Kandy, Sri Lanka";
-  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-    mapQuery
-  )}&z=14&output=embed`;
+  const container = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Text Reveal
+      gsap.from(".loc-text", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 75%",
+        },
+      });
+
+      // Map Reveal
+      gsap.from(".map-frame", {
+        x: 30,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 75%",
+        },
+      });
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       id="location"
-      className="border-t border-olive-green/10 py-16 md:py-20"
+      ref={container}
+      className="relative w-full bg-stone-50 px-6 py-24 md:px-12 md:py-32 text-stone-900"
     >
-      <div className="mx-auto grid max-w-8xl gap-10 px-6 sm:px-8 md:grid-cols-2 md:items-start">
-        <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">
-            Location
-          </h2>
-          <p className="mt-4 max-w-xl text-base leading-7 text-forest-green/80">
-            Villa 95 Rangala is perfectly situated in Kandy, offering easy access to 
-            popular attractions while maintaining a peaceful retreat atmosphere. Couples 
-            particularly love the location—rating it 10/10 for a two-person trip.
-          </p>
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          
+          {/* --- LEFT: Text Details --- */}
+          <div className="order-2 lg:order-1">
+            <span className="loc-text block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-6">
+              Getting Here
+            </span>
+            <h2 className="loc-text text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900 mb-8">
+              Hidden in the hills, <br />
+              <span className="font-serif italic text-stone-500">yet easy to find.</span>
+            </h2>
 
-          <div className="mt-6 rounded-2xl border border-olive-green/20 bg-white p-5 text-sm">
-            <p className="font-semibold text-forest-green">
-              Nearby Attractions
-            </p>
-            <ul className="mt-3 space-y-2 text-forest-green/80">
-              <li>• Victoria Reservoir Kandy Seaplane Base - 9.9 mi</li>
-              <li>• Pallekele International Cricket Stadium - 8.1 mi</li>
-              <li>• Sri Dalada Maligawa (Temple of the Tooth) - 17 mi</li>
-            </ul>
+            <div className="space-y-8">
+              {/* Address */}
+              <div className="loc-text flex gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white border border-stone-200 text-emerald-700 shadow-sm">
+                  <MapPin className="h-4 w-4" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold uppercase tracking-wide text-stone-900">
+                    Address
+                  </h4>
+                  <p className="mt-1 text-base text-stone-600 font-light leading-relaxed">
+
+http://googleusercontent.com/map_location_reference/1
+                    [Villa 95 Rangala](http://googleusercontent.com/map_location_reference/0) <br />
+                    No.95 Bobebila Makuldeniya Rd, <br />
+                    Kandy 20921, Sri Lanka
+                  </p>
+                </div>
+              </div>
+
+              {/* Distances */}
+              <div className="loc-text flex gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white border border-stone-200 text-emerald-700 shadow-sm">
+                  <Car className="h-4 w-4" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold uppercase tracking-wide text-stone-900">
+                    Drive Times
+                  </h4>
+                  <ul className="mt-1 text-sm text-stone-600 space-y-1 font-light">
+                    <li>• 45 mins from Kandy City Center</li>
+                    <li>• 3.5 hours from Colombo Airport (CMB)</li>
+                    <li>• 20 mins to Knuckles Mountain Range entrance</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Google Maps Button */}
+            <div className="loc-text mt-12">
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=Villa+95+Rangala"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 rounded-full bg-stone-900 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-emerald-700"
+              >
+                <Navigation className="h-4 w-4" />
+                Get Directions
+              </a>
+            </div>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-olive-green/20 bg-white p-5 text-sm">
-            <p className="font-semibold text-forest-green">
-              Activities
-            </p>
-            <ul className="mt-3 space-y-2 text-forest-green/80">
-              <li>• Walking tours</li>
-              <li>• Hiking trails</li>
-              <li>• Cultural site visits</li>
-            </ul>
-          </div>
-
-          <a
-            href="https://www.booking.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-sunlit-amber px-5 text-sm font-medium text-white hover:bg-sunlit-amber/90 transition-colors"
-          >
-            Open Booking.com
-          </a>
-        </div>
-
-        <div className="rounded-3xl border border-olive-green/20 bg-earthy-taupe/10 p-6">
-          <div className="aspect-[16/10] w-full overflow-hidden rounded-2xl border border-sky-blue/30 bg-white">
+          {/* --- RIGHT: Map Embed --- */}
+          <div className="map-frame order-1 lg:order-2 h-[400px] md:h-[500px] w-full overflow-hidden rounded-2xl shadow-xl border border-stone-200 bg-stone-200 relative">
             <iframe
-              title="Villa 95 location map"
-              src={mapSrc}
-              className="h-full w-full"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
-            />
+              referrerPolicy="no-referrer-when-downgrade"
+              // This is a Google Maps Embed search query for "Villa 95 Rangala"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.271674706593!2d80.7726692!3d7.3431039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae35f290eba10f7%3A0x5eab28d146c5416d!2sVilla%2095%20Rangala!5e0!3m2!1sen!2slk!4v1710000000000!5m2!1sen!2slk"
+              className="absolute inset-0 grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+            ></iframe>
           </div>
 
-          <div className="mt-4 flex items-center justify-between gap-3">
-            <p className="text-xs text-warm-brown">{mapQuery}</p>
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                mapQuery
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-medium text-forest-green underline underline-offset-4 hover:text-forest-green/80"
-            >
-              View on Google Maps
-            </a>
-          </div>
         </div>
       </div>
     </section>

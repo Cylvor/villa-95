@@ -1,122 +1,172 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import gsap from "gsap";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 
 export default function Header() {
-  const [activeSection, setActiveSection] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
+  // 1. Handle Scroll Effect (Transparent -> Solid White)
   useEffect(() => {
-    const sections = ["home", "about", "amenities", "gallery", "location", "destinations"];
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Choose the entry with the largest intersectionRatio (fallback even when none are "isIntersecting")
-        const sorted = entries.slice().sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (sorted.length === 0) return;
-        const topId = sorted[0].target.id;
-        // If we're near the top of the page (hero), ignore observer changes on initial load
-        if (typeof window !== "undefined" && window.scrollY < 120) {
-          setActiveSection("");
-          return;
-        }
-        // Don't mark anything when we're in the `home` (hero) section
-        if (topId === "home") setActiveSection("");
-        else setActiveSection(topId);
-      },
-      { threshold: [0.25, 0.5, 0.75], rootMargin: "-100px 0px -50% 0px" }
-    );
-
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => {
-      setIsScrolled(window.scrollY > 40);
-      // Clear active section when near the top (in hero)
-      if (window.scrollY < 120) setActiveSection("");
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
-    window.addEventListener("scroll", onScroll);
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // 2. Handle Mobile Menu Animation (GSAP)
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (isMobileOpen) {
+        // Open Animation
+        gsap.to(mobileMenuRef.current, {
+          y: "0%",
+          duration: 0.8,
+          ease: "power3.inOut",
+        });
+        gsap.from(".mobile-link", {
+          y: 50,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 0.8,
+          delay: 0.2,
+          ease: "power3.out",
+        });
+      } else {
+        // Close Animation
+        gsap.to(mobileMenuRef.current, {
+          y: "-100%",
+          duration: 0.8,
+          ease: "power3.inOut",
+        });
+      }
+    }, mobileMenuRef);
+
+    return () => ctx.revert();
+  }, [isMobileOpen]);
 
   const navItems = [
-    { href: "#about", label: "About" },
-    { href: "#amenities", label: "Amenities" },
-    { href: "#gallery", label: "Gallery" },
-    { href: "#destinations", label: "Destinations" },
-    { href: "#location", label: "Location" },
+    { name: "About", href: "#about" },
+    { name: "Amenities", href: "#amenities" },
+    { name: "Gallery", href: "#gallery" },
+    { name: "Location", href: "#location" },
+    { name: "FAQ", href: "#faq" },
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-[9999]">
-      <div
-        className={`mx-auto transition-all duration-300 ${
-          isScrolled ? "max-w-full px-4 sm:px-6" : "max-w-6xl px-4 sm:px-6"
+    <>
+      <header
+        className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
+          isScrolled
+            ? "bg-white/90 py-4 text-stone-900 shadow-sm backdrop-blur-md"
+            : "bg-transparent py-6 text-white"
         }`}
       >
-        <div
-          className={`mt-4 flex items-center justify-between transition-all duration-300 rounded-2xl px-5 text-white ${
-            isScrolled
-              ? "h-16 bg-white/10 backdrop-blur-xl shadow-sm border border-white/10"
-              : "h-16 bg-transparent backdrop-blur-xl shadow-none border border-transparent"
-          }`}
-        >
-          {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
-            <div
-              className={`relative transition-all duration-300 ${
-                isScrolled ? "w-9 h-9" : "w-11 h-11"
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-12">
+          
+          {/* --- LOGO (Text-based for Luxury Feel) --- */}
+          <Link href="/" className="relative z-50">
+            <span className={`font-serif text-2xl font-bold tracking-widest transition-colors ${
+                isMobileOpen ? "text-stone-900" : ""
+            }`}>
+              VILLA 95
+            </span>
+          </Link>
+
+          {/* --- DESKTOP NAVIGATION --- */}
+          <nav className="hidden items-center gap-8 md:flex">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="group relative text-xs font-bold uppercase tracking-widest"
+              >
+                {item.name}
+                {/* Magnetic Underline Effect */}
+                <span className={`absolute -bottom-1 left-0 h-[1px] w-0 bg-current transition-all duration-300 group-hover:w-full ${isScrolled ? "bg-emerald-600" : "bg-white"}`} />
+              </Link>
+            ))}
+
+            {/* CTA Button */}
+            <a
+              href="https://www.booking.com/hotel/lk/villa-95-kandy.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group flex items-center gap-2 rounded-full px-5 py-2.5 transition-all ${
+                isScrolled
+                  ? "bg-stone-900 text-white hover:bg-emerald-700"
+                  : "bg-white text-stone-900 hover:bg-stone-200"
               }`}
             >
-              <Image
-                src="/logo_villa.png"
-                alt="Villa 95"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </a>
-
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-1 rounded-full bg-transparent p-1">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href.slice(1);
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={`relative px-4 py-2 text-sm rounded-full transition-all duration-200 ${
-                    isActive
-                      ? "bg-white/20 text-white shadow-sm font-medium"
-                      : "text-white/90 hover:text-white hover:bg-white/10"
-                  }`}
-                >
-                  {item.label}
-                </a>
-              );
-            })}
+              <span className="text-xs font-bold uppercase tracking-widest">
+                Book Now
+              </span>
+              <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
           </nav>
 
-          {/* CTA */}
-          <a
-            href="https://www.booking.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center h-10 px-5 rounded-full bg-sunlit-amber text-white text-sm font-semibold shadow-md transition-all duration-300 hover:bg-sunlit-amber/90 hover:scale-[1.02]"
+          {/* --- MOBILE TOGGLE BUTTON --- */}
+          <button
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            className="relative z-50 block md:hidden"
+            aria-label="Toggle Menu"
           >
-            Book Now
-          </a>
+            {isMobileOpen ? (
+              <X className="h-6 w-6 text-stone-900" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+        </div>
+      </header>
+
+      {/* --- MOBILE FULL-SCREEN MENU --- */}
+      <div
+        ref={mobileMenuRef}
+        className="fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center bg-stone-50 text-stone-900"
+        style={{ transform: "translateY(-100%)" }} // Starts hidden
+      >
+        <div className="flex flex-col items-center gap-8">
+            {navItems.map((item) => (
+                <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsMobileOpen(false)}
+                className="mobile-link text-3xl font-serif font-light tracking-wide hover:text-emerald-700 hover:italic transition-all"
+                >
+                {item.name}
+                </Link>
+            ))}
+            
+            <div className="mobile-link mt-8">
+                <a
+                href="https://www.booking.com/hotel/lk/villa-95-kandy.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-8 py-4 text-white shadow-lg transition-transform active:scale-95"
+                >
+                    <span className="text-sm font-bold uppercase tracking-widest">Book Your Stay</span>
+                </a>
+            </div>
+        </div>
+        
+        {/* Decorative '95' Background Watermark */}
+        <div className="absolute bottom-10 opacity-10 pointer-events-none">
+            <h1 className="text-[15vw] font-black leading-none tracking-tighter text-stone-900">
+                95
+            </h1>
         </div>
       </div>
-    </header>
+    </>
   );
 }
