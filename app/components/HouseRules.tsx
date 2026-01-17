@@ -1,106 +1,114 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Clock, Baby, PawPrint, VolumeX, CreditCard, Info } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const rules = [
   {
-    title: "Check-in",
-    icon: "→",
-    details: [
-      { label: "Time", value: "10:00 AM to 6:00 PM" },
-      { label: "Note", value: "Please let us know your arrival time in advance" }
-    ]
+    title: "Check-in / Out",
+    icon: Clock,
+    text: "Check-in from 10:00 AM - 6:00 PM. Check-out by 11:00 AM. Please inform us of your arrival time in advance.",
   },
   {
-    title: "Check-out",
-    icon: "←",
-    details: [
-      { label: "Time", value: "8:00 AM to 11:00 AM" }
-    ]
+    title: "Children",
+    icon: Baby,
+    text: "Children of all ages are welcome. We do not provide cribs or extra beds at this property.",
   },
   {
-    title: "Cancellation & Prepayment",
-    icon: "⚠",
-    details: [
-      { label: "Policy", value: "Varies according to accommodation type" },
-      { label: "Check", value: "Enter stay dates to see conditions for your selected option" }
-    ]
+    title: "Quiet Sanctuary",
+    icon: VolumeX,
+    text: "To maintain the serenity of the Knuckles Range, we observe quiet hours from 10:00 PM to 7:00 AM.",
   },
   {
-    title: "Children & Beds",
-    icon: "👶",
-    details: [
-      { label: "Children", value: "All ages welcome" },
-      { label: "Age restriction", value: "None for check-in" },
-      { label: "Cribs & Extra beds", value: "Not available at this property" },
-      { label: "Tip", value: "Add number and ages of children when searching for accurate pricing" }
-    ]
+    title: "Pet Policy",
+    icon: PawPrint,
+    text: "We love animals, but to preserve the local wildlife and hygiene, pets are not allowed.",
   },
   {
-    title: "Pets",
-    icon: "🐾",
-    details: [
-      { label: "Policy", value: "Pets are not allowed" }
-    ]
-  }
+    title: "Payment",
+    icon: CreditCard,
+    text: "Cash payments are preferred at the property. Online prepayments vary by booking platform.",
+  },
+  {
+    title: "Cancellation",
+    icon: Info,
+    text: "Policies vary by room type. Please check your specific conditions when selecting your dates.",
+  },
 ];
 
 export default function HouseRules() {
+  const container = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".rule-card", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 85%",
+        },
+      });
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
       id="house-rules"
-      className="border-t border-olive-green/10 bg-earthy-taupe/10 py-16 md:py-20"
+      ref={container}
+      className="relative w-full bg-stone-50 px-6 py-20 md:py-24"
     >
-      <div className="mx-auto max-w-8xl px-6 sm:px-8">
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">
-            House Rules
+      <div className="mx-auto max-w-7xl">
+        
+        {/* --- Header --- */}
+        <div className="mb-16 text-center">
+          <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
+            Good to Know
+          </span>
+          <h2 className="text-3xl md:text-4xl font-light text-stone-900">
+            Essential Information
           </h2>
-          <p className="mt-3 max-w-2xl mx-auto text-base leading-7 text-forest-green/80">
-            Villa 95 Rangala takes special requests. Please review our policies before booking.
-          </p>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {rules.map((rule) => (
+        {/* --- Grid --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {rules.map((rule, idx) => (
             <div
-              key={rule.title}
-              className="rounded-2xl border border-olive-green/20 bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
+              key={idx}
+              className="rule-card flex items-start gap-4 p-6 rounded-xl bg-white border border-stone-100 shadow-sm transition-shadow hover:shadow-md"
             >
-              <div className="flex items-start gap-3">
-                <span className="text-2xl">{rule.icon}</span>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-forest-green">
-                    {rule.title}
-                  </h3>
-                  <div className="mt-4 space-y-3">
-                    {rule.details.map((detail, idx) => (
-                      <div key={idx}>
-                        <p className="text-xs font-medium text-forest-green/60 uppercase tracking-wide">
-                          {detail.label}
-                        </p>
-                        <p className="mt-1 text-sm text-forest-green/90 leading-relaxed">
-                          {detail.value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-stone-50 text-emerald-700">
+                <rule.icon className="h-5 w-5" />
+              </div>
+              
+              <div>
+                <h3 className="text-sm font-bold uppercase tracking-wide text-stone-900 mb-2">
+                  {rule.title}
+                </h3>
+                <p className="text-sm font-light leading-relaxed text-stone-500">
+                  {rule.text}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-10 rounded-2xl border border-sunlit-amber/30 bg-sunlit-amber/5 p-6">
-          <div className="flex items-start gap-3">
-            <span className="text-xl">ℹ️</span>
-            <div>
-              <p className="text-sm font-medium text-forest-green">
-                Important Information
-              </p>
-              <p className="mt-2 text-sm text-forest-green/80 leading-relaxed">
-                Cancellation and prepayment policies vary according to accommodation type. 
-                Enter your stay dates and check the conditions of your selected option when booking.
-              </p>
-            </div>
-          </div>
+        {/* --- Note --- */}
+        <div className="mt-12 text-center">
+          <p className="text-xs text-stone-400 italic">
+            * Have a special request? <a href="mailto:info@villa95.com" className="underline hover:text-emerald-600">Contact us directly.</a>
+          </p>
         </div>
+
       </div>
     </section>
   );

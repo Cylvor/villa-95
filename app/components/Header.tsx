@@ -55,12 +55,14 @@ export default function Header() {
     return () => ctx.revert();
   }, [isMobileOpen]);
 
+  // --- UPDATED LINKS ---
   const navItems = [
-    { name: "About", href: "#about" },
+    { name: "The Villa", href: "#about" },   // Renamed for premium feel
+    { name: "Suites", href: "#rooms" },      // ADDED: Critical for conversion
     { name: "Amenities", href: "#amenities" },
     { name: "Gallery", href: "#gallery" },
     { name: "Location", href: "#location" },
-    { name: "FAQ", href: "#faq" },
+    // Removed FAQ (moved to footer)
   ];
 
   return (
@@ -74,7 +76,7 @@ export default function Header() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-12">
           
-          {/* --- LOGO (Text-based for Luxury Feel) --- */}
+          {/* --- LOGO --- */}
           <Link href="/" className="relative z-50">
             <span className={`font-serif text-2xl font-bold tracking-widest transition-colors ${
                 isMobileOpen ? "text-stone-900" : ""
@@ -169,4 +171,4 @@ export default function Header() {
       </div>
     </>
   );
-}
+} 

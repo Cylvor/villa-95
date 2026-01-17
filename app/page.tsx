@@ -33,10 +33,11 @@ export default function Home() {
         <SectionReveal>
           <Dining />
         </SectionReveal>
+        <ScrollingText />
+
         <SectionReveal>
           <Amenities />
         </SectionReveal>
-        <ScrollingText />
         <SectionReveal>
           <Gallery />
         </SectionReveal>
@@ -55,7 +56,6 @@ export default function Home() {
         <SectionReveal>
           <HouseRules />
         </SectionReveal>
-        
       </main>
       <Footer />
     </div>
