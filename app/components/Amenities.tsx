@@ -1,65 +1,85 @@
+"use client";
+
+import { Wifi, CloudRain, Car, Flame, Utensils, Mountain } from "lucide-react";
+
 const amenities = [
-  { label: "Free Wi-Fi", icon: "📶" },
-  { label: "Family rooms", icon: "🛏️" },
-  { label: "Free parking", icon: "🅿️" },
-  { label: "Restaurant", icon: "🍽️" },
-  { label: "Non-smoking rooms", icon: "🚭" },
-  { label: "Room service", icon: "🛎️" },
-  { label: "24-hour front desk", icon: "🕘" },
-  { label: "Garden", icon: "🌿" },
-  { label: "Bar", icon: "🍹" },
-  { label: "Breakfast", icon: "🥐" },
-  { label: "Waterpark", icon: "💦" },
-  { label: "Private bathrooms", icon: "🚿" },
-  { label: "Balconies", icon: "🌅" },
-  { label: "Full kitchen", icon: "🍳" },
-  { label: "Washing machine", icon: "🧺" },
-  { label: "Terrace", icon: "🪴" },
-  { label: "Outdoor dining", icon: "🌤️" },
-  { label: "Bicycle parking", icon: "🚲" },
-  { label: "Breakfast in room", icon: "🛌🍳" },
-  { label: "Full-day security", icon: "🛡️" },
-  { label: "Mountain views", icon: "🏔️" },
-  { label: "Garden views", icon: "🌳" },
+  {
+    icon: Wifi,
+    title: "High-Speed Fiber",
+    desc: "Stay connected above the clouds with reliable fiber internet suitable for remote work.",
+  },
+  {
+    icon: Flame,
+    title: "Hot Water",
+    desc: "Essential for the cool mountain climate. Enjoy warm showers in modern bathrooms.",
+  },
+  {
+    icon: Utensils,
+    title: "Authentic Dining",
+    desc: "Farm-to-table Sri Lankan curry, Western breakfast, and BBQ nights arranged by our chef.",
+  },
+  {
+    icon: Mountain,
+    title: "Mountain Trekking",
+    desc: "Direct access to Knuckles Range trails. Guides can be arranged upon request.",
+  },
+  {
+    icon: Car,
+    title: "Free Parking",
+    desc: "Secure on-site parking available for your vehicle or rental driver.",
+  },
+  {
+    icon: CloudRain,
+    title: "Cool Climate",
+    desc: "Escape the heat. Enjoy a natural AC environment with temperatures between 18°C-24°C.",
+  },
 ];
 
 export default function Amenities() {
   return (
     <section
       id="amenities"
-      className="border-y border-olive-green/10 bg-earthy-taupe/20 py-16 md:py-20"
+      className="relative w-full bg-stone-50 px-6 py-24 md:px-12 md:py-32 text-stone-900"
     >
-      <div className="mx-auto max-w-8xl px-6 sm:px-8">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <h2 className="text-2xl font-semibold tracking-tight text-forest-green sm:text-3xl">
-            Amenities
+      <div className="mx-auto max-w-7xl">
+        
+        {/* --- Header --- */}
+        <div className="mb-16 max-w-2xl">
+          <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
+            Curated Comforts
+          </span>
+          <h2 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900 mb-6">
+            Everything you need, <br />
+            <span className="font-serif italic text-stone-500">nothing you don't.</span>
           </h2>
-          <p className="max-w-xl text-base leading-7 text-forest-green/80">
-            Everything you need for a comfortable stay.
+          <p className="text-stone-500 leading-relaxed">
+            We prioritize the essentials that make a mountain stay comfortable, without cluttering your experience.
           </p>
-          <a
-            href="https://www.booking.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-10 items-center justify-center rounded-full border border-forest-green/20 bg-white px-4 text-sm font-medium text-forest-green hover:bg-olive-green/10 transition-colors"
-          >
-            See full listing
-          </a>
         </div>
 
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {amenities.map((a) => (
+        {/* --- Grid --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {amenities.map((item, idx) => (
             <div
-              key={a.label}
-              className="flex items-start gap-2 rounded-2xl border border-olive-green/20 bg-white p-4 text-sm text-forest-green"
+              key={idx}
+              className="group relative overflow-hidden rounded-2xl bg-white p-8 border border-stone-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-emerald-100"
             >
-              <span aria-hidden="true" className="text-lg leading-none">
-                {a.icon}
-              </span>
-              <span className="leading-6">{a.label}</span>
+              {/* Icon Circle */}
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-stone-50 text-emerald-700 transition-colors group-hover:bg-emerald-600 group-hover:text-white">
+                <item.icon className="h-5 w-5" />
+              </div>
+
+              {/* Content */}
+              <h3 className="mb-3 text-lg font-bold text-stone-900">
+                {item.title}
+              </h3>
+              <p className="text-sm font-light leading-relaxed text-stone-500">
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

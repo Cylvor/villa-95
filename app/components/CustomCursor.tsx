@@ -12,7 +12,6 @@ export default function CustomCursor() {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsVisible(true);
 
-      // Check if hovering over clickable elements
       const target = e.target as HTMLElement;
       setIsPointer(
         window.getComputedStyle(target).cursor === "pointer" ||
@@ -39,42 +38,63 @@ export default function CustomCursor() {
 
   if (!isVisible) return null;
 
-  const text = "VILLA 95 RANGALA • ";
-  const radius = isPointer ? 65 : 55;
+  // --- CONFIGURATION ---
+  const textString = "VILLA 95 • ";
+  const text = textString.repeat(3); 
+  
+  const baseRadius = 32;
+  const hoverRadius = 40;
+  
+  const radius = isPointer ? hoverRadius : baseRadius;
+  const fontSize = 8.5; 
+  const size = radius * 2.8; 
 
   return (
-    <>
-      {/* Main cursor dot */}
+    <div className="pointer-events-none fixed inset-0 z-[9999] mix-blend-difference">
+      
+      {/* Main cursor dot - INCREASED SIZE */}
       <div
-        className={`custom-cursor-dot ${isPointer ? "cursor-hover" : ""}`}
+        className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white transition-transform duration-300 ease-out ${
+            // Increased to h-4 w-4 (16px) and h-5 w-5 (20px) on hover
+            isPointer ? "h-5 w-5 scale-110" : "h-4 w-4 scale-100"
+        }`}
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
         }}
       />
 
-      {/* Rotating text around cursor */}
+      {/* Rotating text ring */}
       <div
-        className={`custom-cursor-text ${isPointer ? "cursor-hover" : ""}`}
+        className="absolute -translate-x-1/2 -translate-y-1/2"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
+          width: size,
+          height: size,
         }}
       >
-        <svg width={radius * 2.5} height={radius * 2.5} viewBox={`0 0 ${radius * 2.5} ${radius * 2.5}`}>
-          <defs>
-            <path
-              id="circlePath"
-              d={`M ${radius * 1.25}, ${radius * 1.25} m -${radius}, 0 a ${radius},${radius} 0 1,1 ${radius * 2},0 a ${radius},${radius} 0 1,1 -${radius * 2},0`}
-            />
-          </defs>
-          <text className="cursor-rotating-text">
-            <textPath href="#circlePath" startOffset="0%">
-              {text.repeat(3)}
-            </textPath>
-          </text>
-        </svg>
+        <div className={`h-full w-full transition-all duration-500 ease-out ${isPointer ? "scale-100 opacity-100" : "scale-90 opacity-60"}`}>
+            <svg 
+                width="100%" 
+                height="100%" 
+                viewBox={`0 0 ${size} ${size}`}
+                className="animate-[spin_10s_linear_infinite]"
+            >
+            <defs>
+                <path
+                id="circlePath"
+                d={`M ${size / 2}, ${size / 2} m -${radius}, 0 a ${radius},${radius} 0 1,1 ${radius * 2},0 a ${radius},${radius} 0 1,1 -${radius * 2},0`}
+                />
+            </defs>
+            <text fill="white" fontSize={fontSize} fontWeight="bold" letterSpacing="0.1em" className="uppercase font-mono">
+                <textPath href="#circlePath" startOffset="0%">
+                {text}
+                </textPath>
+            </text>
+            </svg>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
