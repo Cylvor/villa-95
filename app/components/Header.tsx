@@ -81,7 +81,7 @@ export default function Header() {
             <span className={`font-serif text-2xl font-bold tracking-widest transition-colors ${
                 isMobileOpen ? "text-stone-900" : ""
             }`}>
-              VILLA 95
+              VILLA 95 Rangala
             </span>
           </Link>
 

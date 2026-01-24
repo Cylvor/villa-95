@@ -42,21 +42,19 @@ export default function CustomCursor() {
   const textString = "VILLA 95 • ";
   const text = textString.repeat(3); 
   
-  const baseRadius = 32;
-  const hoverRadius = 40;
-  
-  const radius = isPointer ? hoverRadius : baseRadius;
+  // FIXED RADIUS (Does not change on hover)
+  const radius = 32; 
   const fontSize = 8.5; 
   const size = radius * 2.8; 
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999] mix-blend-difference">
       
-      {/* Main cursor dot - INCREASED SIZE */}
+      {/* Main cursor dot - SCALES ON HOVER */}
       <div
-        className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white transition-transform duration-300 ease-out ${
-            // Increased to h-4 w-4 (16px) and h-5 w-5 (20px) on hover
-            isPointer ? "h-5 w-5 scale-110" : "h-4 w-4 scale-100"
+        className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white transition-transform duration-300 ease-out h-4 w-4 ${
+            // Scale from 1 (16px) to 1.5 (24px) when hovering
+            isPointer ? "scale-[1.5]" : "scale-100"
         }`}
         style={{
           left: `${position.x}px`,
@@ -64,7 +62,7 @@ export default function CustomCursor() {
         }}
       />
 
-      {/* Rotating text ring */}
+      {/* Rotating text ring - SIZE STAYS CONSTANT */}
       <div
         className="absolute -translate-x-1/2 -translate-y-1/2"
         style={{
@@ -74,7 +72,7 @@ export default function CustomCursor() {
           height: size,
         }}
       >
-        <div className={`h-full w-full transition-all duration-500 ease-out ${isPointer ? "scale-100 opacity-100" : "scale-90 opacity-60"}`}>
+        <div className={`h-full w-full transition-opacity duration-500 ease-out ${isPointer ? "opacity-100" : "opacity-60"}`}>
             <svg 
                 width="100%" 
                 height="100%" 

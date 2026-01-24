@@ -15,6 +15,7 @@ import SectionReveal from "./components/SectionReveal";
 import Reviews from "./components/Reviews";
 import FAQ from "./components/FAQ";
 import RoomTypes from "./components/RoomTypes";
+import Bar from "./components/Bar";
 
 export default function Home() {
   return (
@@ -37,7 +38,13 @@ export default function Home() {
         <SectionReveal>
           <Dining />
         </SectionReveal>
-        <ScrollingText />
+
+                <ScrollingText />
+
+        <SectionReveal>
+          <Bar />
+        </SectionReveal>
+
 
         <SectionReveal>
           <Amenities />
