@@ -7,6 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function SmoothScroll() {
   useEffect(() => {
+    const isCoarsePointer = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    if (isCoarsePointer) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

@@ -3,11 +3,29 @@
 import { useEffect, useState } from "react";
 
 export default function CustomCursor() {
+  const [enabled, setEnabled] = useState(false);
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const mql = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const updateEnabled = () => setEnabled(mql.matches);
+    updateEnabled();
+
+    // Safari < 14 fallback
+    // eslint-disable-next-line deprecation/deprecation
+    mql.addEventListener ? mql.addEventListener("change", updateEnabled) : mql.addListener(updateEnabled);
+
+    return () => {
+      // eslint-disable-next-line deprecation/deprecation
+      mql.removeEventListener ? mql.removeEventListener("change", updateEnabled) : mql.removeListener(updateEnabled);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
+
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsVisible(true);
@@ -34,9 +52,9 @@ export default function CustomCursor() {
       document.removeEventListener("mouseleave", hideCursor);
       document.removeEventListener("mouseenter", showCursor);
     };
-  }, []);
+  }, [enabled]);
 
-  if (!isVisible) return null;
+  if (!enabled || !isVisible) return null;
 
   // --- CONFIGURATION ---
   const textString = "VILLA 95 • ";

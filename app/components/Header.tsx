@@ -152,7 +152,7 @@ export default function Header() {
 
                 {/* Dropdown Menu */}
                 {item.dropdown && openDropdown === item.name && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden border border-stone-200">
+                  <div className="absolute top-full left-0 z-50 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden border border-stone-200">
                     {item.dropdown.map((dropItem) => (
                       <Link
                         key={dropItem.name}
@@ -203,10 +203,10 @@ export default function Header() {
       {/* --- MOBILE FULL-SCREEN MENU --- */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center bg-stone-50 text-stone-900 overflow-y-auto"
+        className="fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-start bg-stone-50 text-stone-900 overflow-y-auto pt-28 pb-14"
         style={{ transform: "translateY(-100%)" }} // Starts hidden
       >
-        <div className="flex flex-col items-center gap-6 py-20">
+        <div className="flex w-full max-w-md flex-col items-center gap-6 px-6">
             {navItems.map((item) => (
               <div key={item.name} className="flex flex-col items-center gap-3">
                 <Link
