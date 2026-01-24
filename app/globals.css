@@ -10,14 +10,6 @@ html {
   scroll-behavior: smooth;
 }
 
-html, body {
-  overflow-x: hidden;
-}
-
-img, video, canvas, svg {
-  max-width: 100%;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -75,25 +67,14 @@ h1, h2, h3, h4, h5, h6 {
   animation: marquee 40s linear infinite;
 }
 
-/* Custom Cursor Styles
-   Only hide the cursor on devices that actually have one.
-   (Touch devices shouldn't be affected.)
-*/
-@media (hover: hover) and (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-
-  /* Allow default cursor on inputs and text areas */
-  input, textarea, select {
-    cursor: text !important;
-  }
+/* Custom Cursor Styles */
+* {
+  cursor: none !important;
 }
 
-@media (hover: none) and (pointer: coarse) {
-  * {
-    cursor: auto !important;
-  }
+/* Allow default cursor on inputs and text areas */
+input, textarea, select {
+  cursor: text !important;
 }
 
 .custom-cursor-dot {
