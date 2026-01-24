@@ -134,12 +134,12 @@ export default function Destinations() {
               {destinations.map((item) => (
                 <div key={item.id} className="relative">
                   <button
-                    onMouseEnter={() => {
+                    onMouseEnter={() => setActiveId(item.id)}
+                    onClick={() => {
                       setActiveId(item.id);
-                      setMobileHoverId(item.id);
+                      // Toggle mobile image on click
+                      setMobileHoverId(mobileHoverId === item.id ? null : item.id);
                     }}
-                    onMouseLeave={() => setMobileHoverId(null)}
-                    onClick={() => setActiveId(item.id)}
                     // Added ample py-8 to make the list tall enough to scroll nicely against the sticky image
                     className={`group relative flex items-center justify-between w-full py-8 transition-all duration-300 border-b border-stone-200 ${
                       activeId === item.id 
