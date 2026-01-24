@@ -73,14 +73,14 @@ export default function Home() {
       
       {/* --- WhatsApp Floating Icon --- */}
       <a 
-        href="https://wa.me/1234567890" 
+        href="https://wa.me/94773864650" 
         target="_blank" 
         rel="noopener noreferrer"
         className="fixed bottom-8 right-8 z-[9999] group"
       >
         <div className="relative">
           {/* Pulsing background */}
-          <div className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75"></div>
+          <div className="absolute inset-2 rounded-full bg-green-500 animate-ping opacity-75"></div>
           {/* Main button */}
           <div className="relative flex items-center justify-center h-14 w-14 rounded-full bg-green-500 hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-110">
             <MessageCircle className="h-7 w-7 text-white" fill="white" />
