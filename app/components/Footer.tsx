@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="bg-stone-900 text-stone-400 py-20 border-t border-stone-800">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         
-        {/* --- Top Section: Grid (Original Styles Kept) --- */}
+        {/* --- Top Section: Grid --- */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
           
           {/* Brand Column (Span 4) */}
@@ -87,27 +87,20 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* --- Bottom Section: Merged Layout --- */}
-        <div className="border-t border-stone-800 py-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-stone-600">
-          
-          {/* Left: Copyright */}
+        {/* --- Middle Section: Legal & Copyright --- */}
+        <div className="border-t border-stone-800 py-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-stone-600">
           <p>© {currentYear} Villa 95 Rangala. All rights reserved.</p>
-          
-          {/* Right: Legal & Credits Grouped */}
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
-            <div className="flex gap-8">
-              <a href="#" className="hover:text-stone-400 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-stone-400 transition-colors">Terms of Service</a>
-            </div>
-
-            {/* Separator only on desktop */}
-            <span className="hidden md:block text-stone-800">|</span>
-
-            <p className="font-medium text-stone-500">
-               Designed by <span className="text-stone-300 font-bold hover:text-emerald-500 transition-colors cursor-default">Cylvor IT</span>
-            </p>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-stone-400 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-stone-400 transition-colors">Terms of Service</a>
           </div>
+        </div>
 
+        {/* --- BOTTOM SECTION: Credits (Centered & Bigger) --- */}
+        <div className="border-t border-stone-800/50 pt-8 flex justify-center">
+            <p className="text-sm font-medium text-stone-500">
+                Designed by <span className="text-stone-300 font-bold hover:text-emerald-500 transition-colors cursor-default">DataKo Solutions (Pvt) Ltd</span>
+            </p>
         </div>
 
       </div>
