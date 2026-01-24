@@ -97,8 +97,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* --- BOTTOM RIGHT: Scroll Hint --- */}
-      <div className="corner-item absolute bottom-8 right-8 z-20">
+      {/* --- BOTTOM CENTER: Scroll Hint --- */}
+      <div className="corner-item absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
         <div className="flex flex-col items-center gap-2">
           <span className="text-[10px] uppercase tracking-widest writing-vertical-rl opacity-70">
             Scroll to Explore
