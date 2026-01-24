@@ -3,12 +3,14 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, ChevronDown } from "lucide-react";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // 1. Handle Scroll Effect (Transparent -> Solid White)
   useEffect(() => {
@@ -57,13 +59,55 @@ export default function Header() {
 
   // --- UPDATED LINKS ---
   const navItems = [
-    { name: "The Villa", href: "#about" },   // Renamed for premium feel
-    { name: "Suites", href: "#rooms" },      // ADDED: Critical for conversion
+    { 
+      name: "The Villa", 
+      href: "#about",
+      dropdown: [
+        { name: "About Us", href: "#about" },
+        { name: "House Rules", href: "#house-rules" },
+      ]
+    },
+    { 
+      name: "Suites", 
+      href: "#rooms",
+      dropdown: [
+        { name: "All Rooms", href: "#rooms" },
+        { name: "Room Types", href: "#room-types" },
+      ]
+    },
+    { 
+      name: "Dining", 
+      href: "#dining",
+      dropdown: [
+        { name: "Restaurant", href: "#dining" },
+        { name: "Bar", href: "#bar" },
+      ]
+    },
     { name: "Amenities", href: "#amenities" },
     { name: "Gallery", href: "#gallery" },
+    { 
+      name: "Experience", 
+      href: "#destinations",
+      dropdown: [
+        { name: "Destinations", href: "#destinations" },
+        { name: "Reviews", href: "#reviews" },
+      ]
+    },
     { name: "Location", href: "#location" },
-    // Removed FAQ (moved to footer)
   ];
+
+  const handleMouseEnter = (itemName: string) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setOpenDropdown(itemName);
+  };
+
+  const handleMouseLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 200);
+  };
 
   return (
     <>
@@ -88,15 +132,39 @@ export default function Header() {
           {/* --- DESKTOP NAVIGATION --- */}
           <nav className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => (
-              <Link
+              <div
                 key={item.name}
-                href={item.href}
-                className="group relative text-xs font-bold uppercase tracking-widest"
+                className="relative"
+                onMouseEnter={() => item.dropdown && handleMouseEnter(item.name)}
+                onMouseLeave={handleMouseLeave}
               >
-                {item.name}
-                {/* Magnetic Underline Effect */}
-                <span className={`absolute -bottom-1 left-0 h-[1px] w-0 bg-current transition-all duration-300 group-hover:w-full ${isScrolled ? "bg-emerald-600" : "bg-white"}`} />
-              </Link>
+                <Link
+                  href={item.href}
+                  className="group relative text-xs font-bold uppercase tracking-widest flex items-center gap-1"
+                >
+                  {item.name}
+                  {item.dropdown && (
+                    <ChevronDown className={`h-3 w-3 transition-transform ${openDropdown === item.name ? 'rotate-180' : ''}`} />
+                  )}
+                  {/* Magnetic Underline Effect */}
+                  <span className={`absolute -bottom-1 left-0 h-[1px] w-0 bg-current transition-all duration-300 group-hover:w-full ${isScrolled ? "bg-emerald-600" : "bg-white"}`} />
+                </Link>
+
+                {/* Dropdown Menu */}
+                {item.dropdown && openDropdown === item.name && (
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden border border-stone-200">
+                    {item.dropdown.map((dropItem) => (
+                      <Link
+                        key={dropItem.name}
+                        href={dropItem.href}
+                        className="block px-4 py-3 text-xs font-medium text-stone-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
+                      >
+                        {dropItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
 
             {/* CTA Button */}
@@ -135,19 +203,36 @@ export default function Header() {
       {/* --- MOBILE FULL-SCREEN MENU --- */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center bg-stone-50 text-stone-900"
+        className="fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center bg-stone-50 text-stone-900 overflow-y-auto"
         style={{ transform: "translateY(-100%)" }} // Starts hidden
       >
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-6 py-20">
             {navItems.map((item) => (
+              <div key={item.name} className="flex flex-col items-center gap-3">
                 <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMobileOpen(false)}
-                className="mobile-link text-3xl font-serif font-light tracking-wide hover:text-emerald-700 hover:italic transition-all"
+                  href={item.href}
+                  onClick={() => !item.dropdown && setIsMobileOpen(false)}
+                  className="mobile-link text-3xl font-serif font-light tracking-wide hover:text-emerald-700 hover:italic transition-all"
                 >
-                {item.name}
+                  {item.name}
                 </Link>
+                
+                {/* Mobile Dropdown Items */}
+                {item.dropdown && (
+                  <div className="flex flex-col items-center gap-2">
+                    {item.dropdown.map((dropItem) => (
+                      <Link
+                        key={dropItem.name}
+                        href={dropItem.href}
+                        onClick={() => setIsMobileOpen(false)}
+                        className="mobile-link text-lg font-light text-stone-600 hover:text-emerald-700 transition-all"
+                      >
+                        {dropItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
             
             <div className="mobile-link mt-8">
