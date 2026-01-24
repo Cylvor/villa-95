@@ -73,6 +73,7 @@ const destinations = [
 
 export default function Destinations() {
   const [activeId, setActiveId] = useState(1);
+  const [mobileHoverId, setMobileHoverId] = useState<number | null>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const fadeRef = useRef<HTMLDivElement>(null);
 
@@ -131,46 +132,69 @@ export default function Destinations() {
           <div className="order-2 lg:order-1 lg:w-5/12 w-full">
             <div className="flex flex-col">
               {destinations.map((item) => (
-                <button
-                  key={item.id}
-                  onMouseEnter={() => setActiveId(item.id)}
-                  onClick={() => setActiveId(item.id)}
-                  // Added ample py-8 to make the list tall enough to scroll nicely against the sticky image
-                  className={`group relative flex items-center justify-between py-8 transition-all duration-300 border-b border-stone-200 ${
-                    activeId === item.id 
-                      ? "opacity-100 pl-4 bg-stone-100/50 rounded-lg -mx-2 px-6" 
-                      : "opacity-40 hover:opacity-100 hover:pl-2"
-                  }`}
-                >
-                  {/* Indicator Dot */}
-                  {activeId === item.id && (
-                    <span className="absolute left-2 h-1.5 w-1.5 rounded-full bg-emerald-600" />
-                  )}
-                  
-                  <div className="text-left">
-                    <span className="mb-1 block text-[10px] font-bold uppercase tracking-widest text-emerald-700">
-                      {item.category}
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-light text-stone-900">
-                      {item.name}
-                    </h3>
-                  </div>
+                <div key={item.id} className="relative">
+                  <button
+                    onMouseEnter={() => {
+                      setActiveId(item.id);
+                      setMobileHoverId(item.id);
+                    }}
+                    onMouseLeave={() => setMobileHoverId(null)}
+                    onClick={() => setActiveId(item.id)}
+                    // Added ample py-8 to make the list tall enough to scroll nicely against the sticky image
+                    className={`group relative flex items-center justify-between w-full py-8 transition-all duration-300 border-b border-stone-200 ${
+                      activeId === item.id 
+                        ? "opacity-100 pl-4 bg-stone-100/50 rounded-lg -mx-2 px-6" 
+                        : "opacity-40 hover:opacity-100 hover:pl-2"
+                    }`}
+                  >
+                    {/* Indicator Dot */}
+                    {activeId === item.id && (
+                      <span className="absolute left-2 h-1.5 w-1.5 rounded-full bg-emerald-600" />
+                    )}
+                    
+                    <div className="text-left">
+                      <span className="mb-1 block text-[10px] font-bold uppercase tracking-widest text-emerald-700">
+                        {item.category}
+                      </span>
+                      <h3 className="text-2xl md:text-3xl font-light text-stone-900">
+                        {item.name}
+                      </h3>
+                    </div>
 
-                  <ArrowUpRight 
-                    className={`h-5 w-5 transition-transform duration-300 ${
-                        activeId === item.id 
-                        ? "text-emerald-600 rotate-45" 
-                        : "text-stone-400 group-hover:text-stone-900"
-                    }`} 
-                  />
-                </button>
+                    <ArrowUpRight 
+                      className={`h-5 w-5 transition-transform duration-300 ${
+                          activeId === item.id 
+                          ? "text-emerald-600 rotate-45" 
+                          : "text-stone-400 group-hover:text-stone-900"
+                      }`} 
+                    />
+                  </button>
+                  
+                  {/* Mobile hover image - only visible on mobile (< lg) */}
+                  {mobileHoverId === item.id && (
+                    <div className="lg:hidden mt-4 mb-4 relative h-64 w-full overflow-hidden rounded-sm bg-stone-200 shadow-md animate-in fade-in slide-in-from-top-4 duration-300">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute bottom-0 left-0 p-4 w-full">
+                        <p className="text-sm font-light text-white leading-snug">
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>
 
           {/* --- RIGHT COLUMN: Sticky Image --- */}
           {/* sticky top-32 ensures it pins to the top while you scroll the list on the left */}
-          <div className="order-1 lg:order-2 lg:w-7/12 w-full lg:sticky lg:top-32 h-[50vh] lg:h-[75vh]">
+          <div className="hidden lg:block order-1 lg:order-2 lg:w-7/12 w-full lg:sticky lg:top-32 h-[50vh] lg:h-[75vh]">
             <div className="relative h-full w-full overflow-hidden rounded-sm bg-stone-200 shadow-lg">
                 
                 {/* The Image */}
