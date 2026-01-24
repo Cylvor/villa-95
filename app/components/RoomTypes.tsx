@@ -1,7 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { User, BedDouble, Maximize, ArrowRight, Check } from "lucide-react";
+import { User, BedDouble, Maximize, ArrowRight, Check, ChevronLeft, ChevronRight } from "lucide-react";
 
 const rooms = [
   {
@@ -12,6 +13,13 @@ const rooms = [
     description: "An intimate sanctuary perched on the edge of the ridge. Designed for romance and solitude, this studio features a wall of glass that opens onto a private balcony, blurring the line between your bed and the clouds.",
     price: "From $55",
     image: "/couple-room.jpg", // Replace with your image path
+    images: [
+      "/Images/V95_Rooms (19).webp",
+      "/Images/V95_Rooms (20).webp",
+      "/Images/V95_Rooms (5).webp",
+      "/Images/V95_Rooms (21).webp",
+      "/Images/V95_Rooms (18).webp",
+    ],
     features: [
       { icon: User, text: "2 Adults" },
       { icon: BedDouble, text: "1 King Bed" },
@@ -37,6 +45,37 @@ const rooms = [
 ];
 
 export default function RoomTypes() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Auto-advance slideshow for Sky Studio
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % rooms[0].images.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
+
+  const nextSlide = () => {
+    setIsAutoPlaying(false);
+    setCurrentSlide((prev) => (prev + 1) % rooms[0].images.length);
+  };
+
+  const prevSlide = () => {
+    setIsAutoPlaying(false);
+    setCurrentSlide((prev) =>
+      prev === 0 ? rooms[0].images.length - 1 : prev - 1
+    );
+  };
+
+  const goToSlide = (index: number) => {
+    setIsAutoPlaying(false);
+    setCurrentSlide(index);
+  };
+
   return (
     <section className="bg-white py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
@@ -62,17 +101,69 @@ export default function RoomTypes() {
             >
               {/* IMAGE SIDE */}
               <div className="relative h-[400px] w-full overflow-hidden rounded-sm bg-stone-200 lg:h-[500px] lg:w-1/2">
-                {/* Replace this div with <Image /> when you have real photos.
-                   Example: <Image src={room.image} alt={room.name} fill className="object-cover" />
-                */}
-                <div className="absolute inset-0 bg-stone-300">
+                {room.id === "couple" && room.images ? (
+                  // Slideshow for Sky Studio
+                  <>
+                    {room.images.map((img, imgIndex) => (
+                      <div
+                        key={imgIndex}
+                        className={`absolute inset-0 transition-opacity duration-700 ${
+                          imgIndex === currentSlide ? "opacity-100" : "opacity-0"
+                        }`}
+                      >
+                        <Image
+                          src={img}
+                          alt={`${room.name} - View ${imgIndex + 1}`}
+                          fill
+                          className="object-cover"
+                          priority={imgIndex === 0}
+                        />
+                      </div>
+                    ))}
+
+                    {/* Navigation Arrows */}
+                    <button
+                      onClick={prevSlide}
+                      className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110"
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft className="h-5 w-5 text-stone-900" />
+                    </button>
+                    <button
+                      onClick={nextSlide}
+                      className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110"
+                      aria-label="Next image"
+                    >
+                      <ChevronRight className="h-5 w-5 text-stone-900" />
+                    </button>
+
+                    {/* Slide Indicators */}
+                    <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+                      {room.images.map((_, imgIndex) => (
+                        <button
+                          key={imgIndex}
+                          onClick={() => goToSlide(imgIndex)}
+                          className={`h-1.5 rounded-full transition-all ${
+                            imgIndex === currentSlide
+                              ? "w-6 bg-white"
+                              : "w-1.5 bg-white/50 hover:bg-white/75"
+                          }`}
+                          aria-label={`Go to slide ${imgIndex + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  // Static placeholder for other rooms
+                  <div className="absolute inset-0 bg-stone-300">
                     <span className="absolute inset-0 flex items-center justify-center text-stone-500 opacity-20 text-4xl font-serif">
-                        {room.name} Image
+                      {room.name} Image
                     </span>
-                </div>
+                  </div>
+                )}
                 
-                {/* Decorative Number */}
-                <div className="absolute top-6 left-6 bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-stone-900 backdrop-blur-md">
+                {/* Decorative Tag */}
+                <div className="absolute top-6 left-6 bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-stone-900 backdrop-blur-md z-10">
                    {room.tagline}
                 </div>
               </div>
