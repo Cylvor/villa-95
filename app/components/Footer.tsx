@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Instagram, Facebook, MapPin, Mail, Phone, ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
@@ -123,8 +124,8 @@ export default function Footer() {
           {/* Right: Legal & Credits Grouped */}
           <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
             <div className="flex gap-8">
-              <a href="#" className="hover:text-stone-400 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-stone-400 transition-colors">Terms of Service</a>
+              <Link href="/privacy-policy" className="hover:text-stone-400 transition-colors">Privacy Policy</Link>
+              <Link href="/terms-of-service" className="hover:text-stone-400 transition-colors">Terms of Service</Link>
             </div>
 
             {/* Separator only on desktop */}
