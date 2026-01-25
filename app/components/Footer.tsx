@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Instagram, Facebook, MapPin, Mail, Phone, ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
@@ -14,18 +15,20 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 text-center md:text-left">
           
           {/* Brand Column (Span 4) */}
-          <div className="md:col-span-4 space-y-6 flex flex-col items-center md:items-start">
-            <h2 className="font-serif text-3xl text-white tracking-widest">
-              VILLA 95
-            </h2>
-            <p className="text-sm leading-relaxed max-w-xs text-stone-500">
-              A private sanctuary above the clouds. Experience the raw beauty of the Knuckles Mountain Range in absolute silence.
+          <div className="md:col-span-4 space-y-6 flex flex-col items-center">
+            <a href="/" aria-label="Villa 95 Home" className="inline-flex">
+              <Image
+                src="/logo/logo.png"
+                alt="Villa 95"
+                width={480}
+                height={180}
+                priority
+                className="h-auto w-72 md:w-80"
+              />
+            </a>
+            <p className="text-sm leading-relaxed text-stone-500 text-center">
+              A1 overseas consultants (pvt) ltd
             </p>
-            {/* Social Icons: Centered on mobile via parent flex items-center */}
-            <div className="flex gap-4">
-              <SocialLink href="#" icon={Instagram} label="Instagram" />
-              <SocialLink href="#" icon={Facebook} label="Facebook" />
-            </div>
           </div>
 
           {/* Navigation Column (Span 2) */}
@@ -65,6 +68,28 @@ export default function Footer() {
                 <a href="tel:+94770000000" className="hover:text-white transition-colors">
                   +94 77 000 0000
                 </a>
+              </li>
+              <li className="pt-2">
+                <div className="flex gap-4">
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-700 text-stone-400 transition-all hover:border-emerald-600 hover:bg-emerald-600 hover:text-white"
+                  >
+                    <Instagram className="h-4 w-4" />
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-700 text-stone-400 transition-all hover:border-emerald-600 hover:bg-emerald-600 hover:text-white"
+                  >
+                    <Facebook className="h-4 w-4" />
+                  </a>
+                </div>
               </li>
             </ul>
           </div>
@@ -128,19 +153,5 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
         {children}
       </a>
     </li>
-  );
-}
-
-function SocialLink({ href, icon: Icon, label }: { href: string; icon: any; label: string }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      className="flex h-10 w-10 items-center justify-center rounded-full border border-stone-700 text-stone-400 transition-all hover:border-emerald-600 hover:bg-emerald-600 hover:text-white"
-    >
-      <Icon className="h-4 w-4" />
-    </a>
   );
 }
