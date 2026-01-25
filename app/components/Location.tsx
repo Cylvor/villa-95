@@ -71,8 +71,7 @@ export default function Location() {
                   </h4>
                   <p className="mt-1 text-base text-stone-600 font-light leading-relaxed">
 
-http://googleusercontent.com/map_location_reference/1
-                    [Villa 95 Rangala](http://googleusercontent.com/map_location_reference/0) <br />
+
                     No.95 Bobebila Makuldeniya Rd, <br />
                     Kandy 20921, Sri Lanka
                   </p>
