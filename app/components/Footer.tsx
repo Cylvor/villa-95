@@ -9,17 +9,19 @@ export default function Footer() {
     <footer className="bg-stone-900 text-stone-400 py-20 border-t border-stone-800">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         
-        {/* --- Top Section: Grid (Original Styles Kept) --- */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+        {/* --- Top Section: Grid --- */}
+        {/* Added 'text-center md:text-left' to center text on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 text-center md:text-left">
           
           {/* Brand Column (Span 4) */}
-          <div className="md:col-span-4 space-y-6">
+          <div className="md:col-span-4 space-y-6 flex flex-col items-center md:items-start">
             <h2 className="font-serif text-3xl text-white tracking-widest">
               VILLA 95
             </h2>
             <p className="text-sm leading-relaxed max-w-xs text-stone-500">
               A private sanctuary above the clouds. Experience the raw beauty of the Knuckles Mountain Range in absolute silence.
             </p>
+            {/* Social Icons: Centered on mobile via parent flex items-center */}
             <div className="flex gap-4">
               <SocialLink href="#" icon={Instagram} label="Instagram" />
               <SocialLink href="#" icon={Facebook} label="Facebook" />
@@ -44,7 +46,7 @@ export default function Footer() {
             <h3 className="text-xs font-bold uppercase tracking-widest text-white">
               Contact
             </h3>
-            <ul className="space-y-4 text-sm">
+            <ul className="space-y-4 text-sm flex flex-col items-center md:items-start">
               <li className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 shrink-0 text-emerald-600 mt-1" />
                 <span>
@@ -68,7 +70,7 @@ export default function Footer() {
           </div>
 
           {/* CTA Column (Span 3) */}
-          <div className="md:col-span-3 space-y-6">
+          <div className="md:col-span-3 space-y-6 flex flex-col items-center md:items-start">
             <h3 className="text-xs font-bold uppercase tracking-widest text-white">
               Book Your Stay
             </h3>
@@ -88,7 +90,7 @@ export default function Footer() {
         </div>
 
         {/* --- Bottom Section: Merged Layout --- */}
-        <div className="border-t border-stone-800 py-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-stone-600">
+        <div className="border-t border-stone-800 py-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-stone-600 text-center md:text-left">
           
           {/* Left: Copyright */}
           <p>© {currentYear} Villa 95 Rangala. All rights reserved.</p>
