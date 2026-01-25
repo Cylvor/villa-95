@@ -12,7 +12,6 @@ export default function Bar() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate the content box sliding up
       gsap.from(".bar-content", {
         y: 50,
         opacity: 0,
@@ -31,74 +30,74 @@ export default function Bar() {
   return (
     <section
       ref={container}
-      className="relative h-[85vh] w-full overflow-hidden bg-stone-900"
+      className="relative w-full bg-stone-50 flex flex-col md:block md:h-[85vh] md:overflow-hidden"
     >
-      {/* --- VIDEO BACKGROUND --- */}
-      {/* Replace src with your bar/nightlife video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover opacity-60"
-      >
-        <source src="/bar-ambiance.mp4" type="video/mp4" />
-      </video>
-
-      {/* Dark Gradient Overlay for Readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/40 to-transparent" />
-
-      {/* --- CONTENT --- */}
-      <div className="absolute inset-0 flex items-center justify-center px-6">
-        <div className="bar-content max-w-2xl text-center">
+      {/* --- CONTENT (First on Mobile) --- */}
+      <div className="order-1 relative z-10 w-full px-6 py-20 bg-stone-50 md:absolute md:inset-0 md:bg-transparent md:flex md:items-center md:justify-center md:py-0 md:order-none">
+        <div className="bar-content max-w-2xl text-center text-stone-900 md:text-white">
           
           {/* Label */}
           <div className="mb-6 flex justify-center">
-            <span className="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-900/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-emerald-400 backdrop-blur-sm">
-              <Sparkles className="h-3 w-3" />
+            <span className="flex items-center gap-2 rounded-full border border-emerald-700/40 bg-emerald-700 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white backdrop-blur-sm">
+              <Sparkles className="h-3 w-3 text-white" />
               Open Evenings
             </span>
           </div>
 
-          {/* Title */}
-          <h2 className="mb-6 font-serif text-5xl text-white md:text-7xl">
+          {/* Title - Changed to Dark */}
+          <h2 className="mb-6 font-serif text-5xl md:text-7xl">
             The Cloud Bar
           </h2>
 
-          <p className="mb-10 text-lg font-light leading-relaxed text-stone-300">
+          {/* Description - Changed to Dark Gray */}
+          <p className="mb-10 text-lg font-light leading-relaxed">
             Sip on signature cocktails as the sun dips below the Knuckles Range. 
             An open-air experience where cool mountain breezes meet curated spirits 
             and low-fi beats.
           </p>
 
-          {/* Features Grid */}
+          {/* Features Grid - Updated for Light Theme */}
           <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <Feature icon={Wine} title="Curated Wine" desc="Global selection" />
             <Feature icon={Sunset} title="Sunset Views" desc="Golden hour magic" />
             <Feature icon={Music} title="Ambient Sound" desc="Chill vibes only" />
           </div>
 
-          {/* Menu Link (Optional) */}
-          <button className="group relative inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:text-emerald-400">
-            View Drink Menu
-            <span className="h-[1px] w-8 bg-white transition-all group-hover:w-12 group-hover:bg-emerald-400" />
-          </button>
-
         </div>
       </div>
+
+      {/* --- VIDEO (Second on Mobile) --- */}
+      <div className="order-2 relative h-[50vh] w-full md:absolute md:inset-0 md:h-full md:order-none -z-0">
+        <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="h-full w-full object-cover"
+        >
+            <source src="/rangala.mp4" type="video/mp4" />
+        </video>
+
+        {/* LIGHT OVERLAY (Critical for Dark Text on Desktop) */}
+        {/* On desktop, we add a white/80 opacity layer so the dark text pops against the video */}
+        
+        {/* Gradient for smooth transition at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-50 via-transparent to-transparent" />
+      </div>
+
     </section>
   );
 }
 
-// Helper Component for Icons
+// Helper Component - Styled for Light Theme
 function Feature({ icon: Icon, title, desc }: { icon: any, title: string, desc: string }) {
   return (
-    <div className="flex flex-col items-center rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-md transition-colors hover:bg-white/10">
-      <Icon className="mb-3 h-5 w-5 text-emerald-400" />
-      <span className="mb-1 block text-sm font-bold uppercase tracking-wide text-white">
+    <div className="flex flex-col items-center rounded-lg border border-stone-200 bg-white p-4 shadow-sm transition-all hover:border-emerald-500 hover:shadow-md">
+      <Icon className="mb-3 h-5 w-5 text-emerald-600" />
+      <span className="mb-1 block text-sm font-bold uppercase tracking-wide text-stone-900">
         {title}
       </span>
-      <span className="text-xs text-stone-400">{desc}</span>
+      <span className="text-xs text-stone-500">{desc}</span>
     </div>
   );
 }

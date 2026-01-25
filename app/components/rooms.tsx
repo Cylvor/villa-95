@@ -145,29 +145,6 @@ export default function Rooms() {
                   ))}
               </div>
             </div>
-
-            {/* CTA */}
-            <div className="pt-4 flex flex-col sm:flex-row gap-6 items-center justify-between border-t border-stone-200 mt-6">
-               <div className="flex flex-col text-center sm:text-left w-full sm:w-auto">
-                 <span className="text-xs font-bold uppercase tracking-widest text-stone-400 mb-1">
-                    Best Rate Guarantee
-                 </span>
-                 <span className="text-xl font-serif italic text-emerald-800">
-                    From $45 / night
-                 </span>
-               </div>
-               
-               <a 
-                 href="https://www.booking.com/hotel/lk/villa-95-kandy.html" 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 className="group inline-flex w-full sm:w-auto justify-center items-center gap-3 bg-stone-900 text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-emerald-700 hover:scale-105 transition-all shadow-xl"
-               >
-                  Check Availability
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-               </a>
-            </div>
-
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ const rooms = [
     tagline: "For Couples & Solo Travelers",
     description: "An intimate sanctuary perched on the edge of the ridge. Designed for romance and solitude, this studio features a wall of glass that opens onto a private balcony, blurring the line between your bed and the clouds.",
     price: "From $55",
-    image: "/couple-room.jpg", // Replace with your image path
+    image: "/couple-room.jpg", 
     images: [
       "/Images/V95_Rooms (19).webp",
       "/Images/V95_Rooms (20).webp",
@@ -34,7 +34,7 @@ const rooms = [
     tagline: "For Families & Groups",
     description: "A sprawling apartment-style suite designed for connection. With a separate living area, full kitchenette, and expansive terrace, it gives your family the freedom to live, cook, and relax together in absolute comfort.",
     price: "From $85",
-    image: "/family-room.jpg", // Replace with your image path
+    image: "/family-room.jpg", 
     features: [
       { icon: User, text: "2-4 Guests" },
       { icon: BedDouble, text: "2 Queen Beds" },
@@ -48,14 +48,11 @@ export default function RoomTypes() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  // Auto-advance slideshow for Sky Studio
   useEffect(() => {
     if (!isAutoPlaying) return;
-
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % rooms[0].images.length);
     }, 4000);
-
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
@@ -95,14 +92,13 @@ export default function RoomTypes() {
           {rooms.map((room, index) => (
             <div
               key={room.id}
-              className={`flex flex-col gap-12 lg:items-center lg:gap-20 ${
+              className={`flex flex-col-reverse gap-12 lg:items-center lg:gap-20 ${
                 index % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"
               }`}
             >
               {/* IMAGE SIDE */}
               <div className="relative h-[400px] w-full overflow-hidden rounded-sm bg-stone-200 lg:h-[500px] lg:w-1/2">
                 {room.id === "couple" && room.images ? (
-                  // Slideshow for Sky Studio
                   <>
                     {room.images.map((img, imgIndex) => (
                       <div
@@ -120,24 +116,12 @@ export default function RoomTypes() {
                         />
                       </div>
                     ))}
-
-                    {/* Navigation Arrows */}
-                    <button
-                      onClick={prevSlide}
-                      className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110"
-                      aria-label="Previous image"
-                    >
+                    <button onClick={prevSlide} className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110">
                       <ChevronLeft className="h-5 w-5 text-stone-900" />
                     </button>
-                    <button
-                      onClick={nextSlide}
-                      className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110"
-                      aria-label="Next image"
-                    >
+                    <button onClick={nextSlide} className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110">
                       <ChevronRight className="h-5 w-5 text-stone-900" />
                     </button>
-
-                    {/* Slide Indicators */}
                     <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
                       {room.images.map((_, imgIndex) => (
                         <button
@@ -148,13 +132,11 @@ export default function RoomTypes() {
                               ? "w-6 bg-white"
                               : "w-1.5 bg-white/50 hover:bg-white/75"
                           }`}
-                          aria-label={`Go to slide ${imgIndex + 1}`}
                         />
                       ))}
                     </div>
                   </>
                 ) : (
-                  // Static placeholder for other rooms
                   <div className="absolute inset-0 bg-stone-300">
                     <span className="absolute inset-0 flex items-center justify-center text-stone-500 opacity-20 text-4xl font-serif">
                       {room.name} Image
@@ -162,14 +144,13 @@ export default function RoomTypes() {
                   </div>
                 )}
                 
-                {/* Decorative Tag */}
                 <div className="absolute top-6 left-6 bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-stone-900 backdrop-blur-md z-10">
                    {room.tagline}
                 </div>
               </div>
 
-              {/* TEXT SIDE */}
-              <div className="flex flex-col justify-center lg:w-1/2">
+              {/* TEXT SIDE - UPDATED FOR CENTERING */}
+              <div className="flex flex-col justify-center lg:w-1/2 items-center lg:items-start text-center lg:text-left">
                 <span className="mb-4 text-6xl font-serif text-stone-100 md:text-8xl">
                   {room.number}
                 </span>
@@ -182,8 +163,8 @@ export default function RoomTypes() {
                   {room.description}
                 </p>
 
-                {/* Key Specs Row */}
-                <div className="mb-8 flex flex-wrap gap-6 border-y border-stone-100 py-6">
+                {/* Key Specs Row - Centered on Mobile */}
+                <div className="mb-8 flex flex-wrap gap-6 border-y border-stone-100 py-6 justify-center lg:justify-start">
                   {room.features.map((feature, i) => (
                     <div key={i} className="flex items-center gap-2">
                       <feature.icon className="h-4 w-4 text-emerald-600" />
@@ -194,18 +175,18 @@ export default function RoomTypes() {
                   ))}
                 </div>
 
-                {/* Highlights List */}
-                <div className="mb-10 grid grid-cols-2 gap-y-2">
+                {/* Highlights List - Centered items on Mobile */}
+                <div className="mb-10 grid grid-cols-2 gap-y-2 w-full max-w-md lg:max-w-none">
                     {room.highlights.map((item, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                            <Check className="h-3 w-3 text-emerald-500" />
+                        <div key={i} className="flex items-center gap-2 justify-center lg:justify-start">
+                            <Check className="h-3 w-3 text-emerald-500 shrink-0" />
                             <span className="text-sm text-stone-500">{item}</span>
                         </div>
                     ))}
                 </div>
 
-                {/* Price & CTA */}
-                <div className="flex items-center gap-8">
+                {/* Price & CTA - Centered on Mobile */}
+                <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 justify-center lg:justify-start w-full">
                   <div>
                     <span className="block text-xs text-stone-400">Starting from</span>
                     <span className="text-2xl font-serif text-emerald-800">{room.price}</span>

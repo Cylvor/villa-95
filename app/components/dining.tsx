@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Utensils, Wine, Sun, ArrowRight, ChefHat } from "lucide-react";
+import { Utensils, Wine, Sun, ChefHat } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,21 +20,24 @@ export default function Dining() {
   const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // 1. Parallax Image Effect
-      gsap.to(imageRef.current, {
-        yPercent: 15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+    let mm = gsap.matchMedia();
 
-      // 2. Stagger Text/Features Reveal
-      gsap.from(".dining-item", {
+    // Only run parallax on desktop to save mobile performance
+    mm.add("(min-width: 768px)", () => {
+        gsap.to(imageRef.current, {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+            trigger: container.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            },
+        });
+    });
+
+    // Stagger Text Reveal (Runs on all sizes)
+    gsap.from(".dining-item", {
         scrollTrigger: {
           trigger: ".dining-grid",
           start: "top 85%",
@@ -44,10 +47,9 @@ export default function Dining() {
         stagger: 0.1,
         duration: 0.8,
         ease: "power2.out",
-      });
-    }, container);
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
@@ -60,7 +62,8 @@ export default function Dining() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
           {/* --- LEFT: Text Content --- */}
-          <div className="order-2 lg:order-1">
+          {/* REMOVED 'order-2' so this naturally sits on top in mobile */}
+          <div>
             <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-6">
               Culinary Journey
             </span>
@@ -75,7 +78,7 @@ export default function Dining() {
                 or comfort foods from around the globe, all while gazing out at the endless green valleys.
               </p>
               <p className="text-sm md:text-base">
-                Whether it's a sunrise breakfast on the open terrace or a quiet evening drink at our bar, 
+                Whether it&apos;s a sunrise breakfast on the open terrace or a quiet evening drink at our bar, 
                 every meal is accompanied by the sound of nature and the cool mountain breeze.
               </p>
             </div>
@@ -99,7 +102,8 @@ export default function Dining() {
           </div>
 
           {/* --- RIGHT: Image (Parallax) --- */}
-          <div className="order-1 lg:order-2 h-[50vh] lg:h-[70vh] w-full relative overflow-hidden rounded-sm bg-stone-200 shadow-xl">
+          {/* REMOVED 'order-1' so this sits below text in mobile */}
+          <div className="h-[50vh] lg:h-[70vh] w-full relative overflow-hidden rounded-sm bg-stone-200 shadow-xl">
              {/* Parallax Container */}
              <div ref={imageRef} className="absolute inset-0 w-full h-[120%] -top-[10%]">
                 <Image
@@ -116,7 +120,7 @@ export default function Dining() {
                     Must Try
                 </p>
                 <p className="text-sm font-serif italic text-stone-900">
-                    "Al Fresco breakfast with a view of the waterfalls."
+                    &quot;Al Fresco breakfast with a view of the waterfalls."
                 </p>
              </div>
           </div>
