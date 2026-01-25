@@ -6,8 +6,24 @@ export default function CustomCursor() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
+    // detect touch devices or small screens and disable custom cursor
+    const isTouchDevice = () =>
+      typeof window !== "undefined" && (
+        "ontouchstart" in window ||
+        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+        window.matchMedia?.("(pointer: coarse)")?.matches
+      );
+
+    const smallScreen = () => typeof window !== "undefined" && window.innerWidth <= 768;
+
+    if (isTouchDevice() || smallScreen()) {
+      setDisabled(true);
+      return;
+    }
+
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsVisible(true);
@@ -36,7 +52,8 @@ export default function CustomCursor() {
     };
   }, []);
 
-  if (!isVisible) return null;
+  // If disabled (mobile/touch) or not visible, don't render the custom cursor
+  if (disabled || !isVisible) return null;
 
   // --- CONFIGURATION ---
   const textString = "VILLA 95 • ";
