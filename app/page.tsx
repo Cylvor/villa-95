@@ -2,7 +2,6 @@ import About from "./components/About";
 import Amenities from "./components/Amenities";
 import Dining from "./components/dining";
 import Rooms from "./components/rooms";
-import CustomCursor from "./components/CustomCursor";
 import Destinations from "./components/Destinations";
 import Footer from "./components/Footer";
 import Gallery from "./components/Gallery";
@@ -21,7 +20,6 @@ import { MessageCircle } from "lucide-react";
 export default function Home() {
   return (
     <div className="min-h-screen bg-mist-cream text-forest-green overflow-x-hidden md:overflow-x-visible">
-      <CustomCursor />
       <Header />
       <main>
         <SectionReveal>
@@ -39,14 +37,10 @@ export default function Home() {
         <SectionReveal>
           <Dining />
         </SectionReveal>
-
-                <ScrollingText />
-
+        <ScrollingText />
         <SectionReveal>
           <Bar />
         </SectionReveal>
-
-
         <SectionReveal>
           <Amenities />
         </SectionReveal>
