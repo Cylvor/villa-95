@@ -39,14 +39,10 @@ export default function Home() {
         <SectionReveal>
           <Dining />
         </SectionReveal>
-
-                <ScrollingText />
-
+        <ScrollingText />
         <SectionReveal>
           <Bar />
         </SectionReveal>
-
-
         <SectionReveal>
           <Amenities />
         </SectionReveal>
