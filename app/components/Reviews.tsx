@@ -166,7 +166,7 @@ export default function Reviews() {
 
         {/* --- Slideshow Window --- */}
         {/* Added -mx-4 px-4 py-12 to Create Breathing Room for Shadows/Icons */}
-        <div className="overflow-hidden w-full -mx-4 px-4 py-12">
+        <div className="overflow-hidden w-full mx-0 md:-mx-4 px-4 py-12">
             
             <div ref={sliderRef} className="flex w-full">
                 {reviews.map((review) => (

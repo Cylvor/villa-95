@@ -143,7 +143,7 @@ export default function Destinations() {
                     // Added ample py-8 to make the list tall enough to scroll nicely against the sticky image
                     className={`group relative flex items-center justify-between w-full py-8 transition-all duration-300 border-b border-stone-200 ${
                       activeId === item.id 
-                        ? "opacity-100 pl-4 bg-stone-100/50 rounded-lg -mx-2 px-6" 
+                        ? "opacity-100 pl-4 bg-stone-100/50 rounded-lg mx-0 md:-mx-2 px-6" 
                         : "opacity-40 hover:opacity-100 hover:pl-2"
                     }`}
                   >

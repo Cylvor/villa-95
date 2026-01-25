@@ -20,7 +20,7 @@ import { MessageCircle } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-mist-cream text-forest-green">
+    <div className="min-h-screen bg-mist-cream text-forest-green overflow-x-hidden md:overflow-x-visible">
       <CustomCursor />
       <Header />
       <main>
