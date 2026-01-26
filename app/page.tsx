@@ -22,9 +22,7 @@ export default function Home() {
     <div className="min-h-screen bg-mist-cream text-forest-green overflow-x-hidden md:overflow-x-visible">
       <Header />
       <main>
-        <SectionReveal>
           <Hero />
-        </SectionReveal>
         <SectionReveal>
           <About />
         </SectionReveal>
