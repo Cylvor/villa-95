@@ -75,7 +75,7 @@ export default function Header() {
             <span className={`font-serif text-xl md:text-2xl font-bold tracking-widest transition-colors ${
                 isScrolled ? "text-stone-900" : "text-white"
             }`}>
-              VILLA 95
+              VILLA 95 Rangala
             </span>
           </Link>
 
