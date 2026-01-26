@@ -34,7 +34,14 @@ const rooms = [
     tagline: "For Families & Groups",
     description: "A sprawling apartment-style suite designed for connection. With a separate living area, full kitchenette, and expansive terrace, it gives your family the freedom to live, cook, and relax together in absolute comfort.",
     price: "From $85",
-    image: "/family-room.jpg", 
+    image: "/family-room.jpg",
+    images: [
+      "/Images/Family/V95_Rooms (1).webp",
+      "/Images/Family/V95_Rooms (2).webp",
+      "/Images/Family/V95_Rooms (3).webp",
+      "/Images/Family/V95_Rooms (4).webp",
+      "/Images/Family/V95_Rooms (5).JPG",
+    ],
     features: [
       { icon: User, text: "2-4 Guests" },
       { icon: BedDouble, text: "2 Queen Beds" },
@@ -45,32 +52,52 @@ const rooms = [
 ];
 
 export default function RoomTypes() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState<{ [key: string]: number }>({
+    couple: 0,
+    family: 0,
+  });
+  const [isAutoPlaying, setIsAutoPlaying] = useState<{ [key: string]: boolean }>({
+    couple: true,
+    family: true,
+  });
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % rooms[0].images.length);
-    }, 4000);
-    return () => clearInterval(interval);
+    const intervals: NodeJS.Timeout[] = [];
+    
+    rooms.forEach((room) => {
+      if (room.images && isAutoPlaying[room.id]) {
+        const interval = setInterval(() => {
+          setCurrentSlide((prev) => ({
+            ...prev,
+            [room.id]: (prev[room.id] + 1) % room.images!.length,
+          }));
+        }, 4000);
+        intervals.push(interval);
+      }
+    });
+
+    return () => intervals.forEach(clearInterval);
   }, [isAutoPlaying]);
 
-  const nextSlide = () => {
-    setIsAutoPlaying(false);
-    setCurrentSlide((prev) => (prev + 1) % rooms[0].images.length);
+  const nextSlide = (roomId: string, imagesLength: number) => {
+    setIsAutoPlaying((prev) => ({ ...prev, [roomId]: false }));
+    setCurrentSlide((prev) => ({
+      ...prev,
+      [roomId]: (prev[roomId] + 1) % imagesLength,
+    }));
   };
 
-  const prevSlide = () => {
-    setIsAutoPlaying(false);
-    setCurrentSlide((prev) =>
-      prev === 0 ? rooms[0].images.length - 1 : prev - 1
-    );
+  const prevSlide = (roomId: string, imagesLength: number) => {
+    setIsAutoPlaying((prev) => ({ ...prev, [roomId]: false }));
+    setCurrentSlide((prev) => ({
+      ...prev,
+      [roomId]: prev[roomId] === 0 ? imagesLength - 1 : prev[roomId] - 1,
+    }));
   };
 
-  const goToSlide = (index: number) => {
-    setIsAutoPlaying(false);
-    setCurrentSlide(index);
+  const goToSlide = (roomId: string, index: number) => {
+    setIsAutoPlaying((prev) => ({ ...prev, [roomId]: false }));
+    setCurrentSlide((prev) => ({ ...prev, [roomId]: index }));
   };
 
   return (
@@ -98,13 +125,13 @@ export default function RoomTypes() {
             >
               {/* IMAGE SIDE */}
               <div className="relative h-[400px] w-full overflow-hidden rounded-sm bg-stone-200 lg:h-[500px] lg:w-1/2">
-                {room.id === "couple" && room.images ? (
+                {room.images ? (
                   <>
                     {room.images.map((img, imgIndex) => (
                       <div
                         key={imgIndex}
                         className={`absolute inset-0 transition-opacity duration-700 ${
-                          imgIndex === currentSlide ? "opacity-100" : "opacity-0"
+                          imgIndex === currentSlide[room.id] ? "opacity-100" : "opacity-0"
                         }`}
                       >
                         <Image
@@ -116,19 +143,25 @@ export default function RoomTypes() {
                         />
                       </div>
                     ))}
-                    <button onClick={prevSlide} className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110">
+                    <button 
+                      onClick={() => prevSlide(room.id, room.images!.length)} 
+                      className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110"
+                    >
                       <ChevronLeft className="h-5 w-5 text-stone-900" />
                     </button>
-                    <button onClick={nextSlide} className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110">
+                    <button 
+                      onClick={() => nextSlide(room.id, room.images!.length)} 
+                      className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110"
+                    >
                       <ChevronRight className="h-5 w-5 text-stone-900" />
                     </button>
                     <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
                       {room.images.map((_, imgIndex) => (
                         <button
                           key={imgIndex}
-                          onClick={() => goToSlide(imgIndex)}
+                          onClick={() => goToSlide(room.id, imgIndex)}
                           className={`h-1.5 rounded-full transition-all ${
-                            imgIndex === currentSlide
+                            imgIndex === currentSlide[room.id]
                               ? "w-6 bg-white"
                               : "w-1.5 bg-white/50 hover:bg-white/75"
                           }`}

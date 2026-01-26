@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Utensils, Wine, Sun, ChefHat } from "lucide-react";
+import { Utensils, Wine, Sun, ChefHat, ChevronLeft, ChevronRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,9 +15,26 @@ const diningFeatures = [
   { icon: ChefHat, label: "Freshly Prepared", desc: "Made to order daily" },
 ];
 
+const diningImages = [
+  "/Images/Foods/V95_Detailshots (1).png",
+  "/Images/Foods/V95_Detailshots (2).png",
+  "/Images/Foods/V95_Detailshots (3).png",
+  "/Images/Foods/V95_Detailshots (4).png",
+];
+
 export default function Dining() {
   const container = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % diningImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
 
   useEffect(() => {
     let mm = gsap.matchMedia();
@@ -51,6 +68,23 @@ export default function Dining() {
 
     return () => mm.revert();
   }, []);
+
+  const nextSlide = () => {
+    setIsAutoPlaying(false);
+    setCurrentSlide((prev) => (prev + 1) % diningImages.length);
+  };
+
+  const prevSlide = () => {
+    setIsAutoPlaying(false);
+    setCurrentSlide((prev) =>
+      prev === 0 ? diningImages.length - 1 : prev - 1
+    );
+  };
+
+  const goToSlide = (index: number) => {
+    setIsAutoPlaying(false);
+    setCurrentSlide(index);
+  };
 
   return (
     <section
@@ -104,18 +138,55 @@ export default function Dining() {
           {/* --- RIGHT: Image (Parallax) --- */}
           {/* REMOVED 'order-1' so this sits below text in mobile */}
           <div className="h-[50vh] lg:h-[70vh] w-full relative overflow-hidden rounded-sm bg-stone-200 shadow-xl">
-             {/* Parallax Container */}
-             <div ref={imageRef} className="absolute inset-0 w-full h-[120%] -top-[10%]">
-                <Image
-                  src="/dining-placeholder.jpg" // REPLACE with food or terrace photo
-                  alt="Dining on the terrace"
-                  fill
-                  className="object-cover"
-                />
+             {/* Image Slideshow */}
+             {diningImages.map((img, imgIndex) => (
+               <div
+                 key={imgIndex}
+                 className={`absolute inset-0 transition-opacity duration-700 ${
+                   imgIndex === currentSlide ? "opacity-100" : "opacity-0"
+                 }`}
+               >
+                 <Image
+                   src={img}
+                   alt={`Dining Experience ${imgIndex + 1}`}
+                   fill
+                   className="object-cover"
+                   priority={imgIndex === 0}
+                 />
+               </div>
+             ))}
+             
+             {/* Navigation Arrows */}
+             <button 
+               onClick={prevSlide} 
+               className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110"
+             >
+               <ChevronLeft className="h-5 w-5 text-stone-900" />
+             </button>
+             <button 
+               onClick={nextSlide} 
+               className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110"
+             >
+               <ChevronRight className="h-5 w-5 text-stone-900" />
+             </button>
+             
+             {/* Dot Indicators */}
+             <div className="absolute bottom-20 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+               {diningImages.map((_, imgIndex) => (
+                 <button
+                   key={imgIndex}
+                   onClick={() => goToSlide(imgIndex)}
+                   className={`h-1.5 rounded-full transition-all ${
+                     imgIndex === currentSlide
+                       ? "w-6 bg-white"
+                       : "w-1.5 bg-white/50 hover:bg-white/75"
+                   }`}
+                 />
+               ))}
              </div>
              
              {/* Floating Badge */}
-             <div className="absolute bottom-8 right-8 bg-white/95 backdrop-blur px-6 py-4 shadow-sm border-r-2 border-emerald-600 text-right max-w-[200px]">
+             <div className="absolute bottom-8 right-8 bg-white/95 backdrop-blur px-6 py-4 shadow-sm border-r-2 border-emerald-600 text-right max-w-[200px] z-10">
                 <p className="text-[10px] uppercase tracking-widest text-emerald-800 mb-1">
                     Must Try
                 </p>
