@@ -54,7 +54,7 @@ export default function Rooms() {
           playsInline
           className="h-full w-full object-cover opacity-100 md:opacity-60"
         >
-          <source src="/rangala.mp4" type="video/mp4" />
+          <source src="/Room.mp4" type="video/mp4" />
         </video>
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-stone-50 via-transparent to-transparent md:bg-gradient-to-r md:from-stone-900/90 md:via-stone-900/20" />
