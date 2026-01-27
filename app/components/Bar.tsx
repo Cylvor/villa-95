@@ -75,7 +75,7 @@ export default function Bar() {
             playsInline
             className="h-full w-full object-cover"
         >
-            <source src="/rangala.mp4" type="video/mp4" />
+            <source src="/Bar.mp4" type="video/mp4" />
         </video>
 
         {/* LIGHT OVERLAY (Critical for Dark Text on Desktop) */}

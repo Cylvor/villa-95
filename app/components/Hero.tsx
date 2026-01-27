@@ -63,7 +63,7 @@ export default function Hero() {
           <source src="/rangala.mp4" type="video/mp4" />
         </video>
         {/* Elegant Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
       {/* --- CENTER: The "Sanctuary" Statement --- */}
