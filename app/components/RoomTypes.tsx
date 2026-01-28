@@ -34,11 +34,11 @@ const rooms = [
     description: "A sprawling apartment-style suite designed for connection. With a separate living area, full kitchenette, and expansive terrace, it gives your family the freedom to live, cook, and relax together in absolute comfort.",
     image: "/family-room.jpg",
     images: [
-      "/Images/Family/V95_Rooms (1).webp",
-      "/Images/Family/V95_Rooms (2).webp",
-      "/Images/Family/V95_Rooms (3).webp",
-      "/Images/Family/V95_Rooms (4).webp",
-      "/Images/Family/V95_Rooms (5).JPG",
+      "/Images/Family/V95_Family_Rooms_1.webp",
+      "/Images/Family/V95_Family_Rooms_2.webp",
+      "/Images/Family/V95_Family_Rooms_3.webp",
+      "/Images/Family/V95_Family_Rooms_4.webp",
+      "/Images/Family/V95_Family_Rooms_5.webp",
     ],
     features: [
       { icon: User, text: "2-4 Guests" },
