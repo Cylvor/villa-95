@@ -78,11 +78,8 @@ export default function Bar() {
             <source src="/Bar.mp4" type="video/mp4" />
         </video>
 
-        {/* LIGHT OVERLAY (Critical for Dark Text on Desktop) */}
-        {/* On desktop, we add a white/80 opacity layer so the dark text pops against the video */}
-        
-        {/* Gradient for smooth transition at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-50 via-transparent to-transparent" />
+        {/* Subtle dark overlay so text remains legible (not too dark) */}
+        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
       </div>
 
     </section>

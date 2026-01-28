@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import gsap from "gsap";
 import { ArrowUpRight, MapPin } from "lucide-react";
 
 const destinations = [
@@ -73,45 +72,19 @@ const destinations = [
     id: 10,
     name: "Kotaganga Seven Falls",
     description: "A series of seven stunning waterfalls cascading through the wilderness.",
-    image: "/seven falls.jpg",
+    image: "/Destinations/sevenfalls.webp",
     category: "WATERFALL",
   },
 ];
 
 export default function Destinations() {
   const [activeId, setActiveId] = useState(1);
-  const [mobileHoverId, setMobileHoverId] = useState<number | null>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const fadeRef = useRef<HTMLDivElement>(null);
-
-  const activeDestination = destinations.find((d) => d.id === activeId) || destinations[0];
-
-  useEffect(() => {
-    if (!imageRef.current || !fadeRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Flash effect (white flash for light theme)
-      gsap.fromTo(
-        fadeRef.current,
-        { opacity: 1 },
-        { opacity: 0, duration: 0.6, ease: "power2.out" }
-      );
-
-      // Slight scale effect
-      gsap.fromTo(
-        imageRef.current,
-        { scale: 1.05 },
-        { scale: 1, duration: 1.2, ease: "power2.out" }
-      );
-    });
-
-    return () => ctx.revert();
-  }, [activeId]);
+  // MOBILE FIX: Initialize with 1 (or destinations[0].id) to show the first image by default
+  const [mobileHoverId, setMobileHoverId] = useState<number | null>(1);
 
   return (
     <section
       id="destinations"
-      // Added min-h to ensure enough scroll space
       className="relative w-full bg-stone-50 px-6 py-24 md:px-12 md:py-32 text-stone-900"
     >
       <div className="mx-auto max-w-7xl">
@@ -135,7 +108,6 @@ export default function Destinations() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
           
           {/* --- LEFT COLUMN: Scrollable List --- */}
-          {/* We remove h-full constraints so this column grows naturally with content */}
           <div className="order-2 lg:order-1 lg:w-5/12 w-full">
             <div className="flex flex-col">
               {destinations.map((item) => (
@@ -144,10 +116,9 @@ export default function Destinations() {
                     onMouseEnter={() => setActiveId(item.id)}
                     onClick={() => {
                       setActiveId(item.id);
-                      // Toggle mobile image on click
+                      // Toggle: if clicking the open one, close it; otherwise open new one
                       setMobileHoverId(mobileHoverId === item.id ? null : item.id);
                     }}
-                    // Added ample py-8 to make the list tall enough to scroll nicely against the sticky image
                     className={`group relative flex items-center justify-between w-full py-8 transition-all duration-300 border-b border-stone-200 ${
                       activeId === item.id 
                         ? "opacity-100 pl-4 bg-stone-100/50 rounded-lg mx-0 md:-mx-2 px-6" 
@@ -177,9 +148,12 @@ export default function Destinations() {
                     />
                   </button>
                   
-                  {/* Mobile hover image - only visible on mobile (< lg) */}
+                  {/* --- MOBILE IMAGE DROPDOWN --- */}
+                  {/* Only renders if mobileHoverId matches. 
+                      'animate-in slide-in-from-top-4' gives the "coming down" effect.
+                  */}
                   {mobileHoverId === item.id && (
-                    <div className="lg:hidden mt-4 mb-4 relative h-64 w-full overflow-hidden rounded-sm bg-stone-200 shadow-md animate-in fade-in slide-in-from-top-4 duration-300">
+                    <div className="lg:hidden mt-4 mb-8 relative h-64 w-full overflow-hidden rounded-sm bg-stone-200 shadow-md animate-in fade-in slide-in-from-top-4 duration-500 origin-top ease-out">
                       <Image
                         src={item.image}
                         alt={item.name}
@@ -199,44 +173,45 @@ export default function Destinations() {
             </div>
           </div>
 
-          {/* --- RIGHT COLUMN: Sticky Image --- */}
-          {/* sticky top-32 ensures it pins to the top while you scroll the list on the left */}
+          {/* --- RIGHT COLUMN: Sticky Image (Desktop Only) --- */}
           <div className="hidden lg:block order-1 lg:order-2 lg:w-7/12 w-full lg:sticky lg:top-32 h-[50vh] lg:h-[75vh]">
-            <div className="relative h-full w-full overflow-hidden rounded-sm bg-stone-200 shadow-lg">
+            <div className="relative h-full w-full overflow-hidden rounded-sm bg-stone-900 shadow-lg">
                 
-                {/* The Image */}
-                <div ref={imageRef} className="relative h-full w-full">
-                    <Image
-                        key={activeDestination.image}
-                        src={activeDestination.image}
-                        alt={activeDestination.name}
-                        fill
-                        className="object-cover transition-opacity duration-500"
-                        priority
-                    />
-                    
-                    {/* Gradient for Text Readability (Still dark at bottom for white text) */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90" />
-                </div>
-
-                {/* Flash Layer (White for light theme) */}
-                <div ref={fadeRef} className="absolute inset-0 bg-stone-50 pointer-events-none" />
-
-                {/* Info Card Overlay */}
-                <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full">
-                    <div className="flex items-center gap-2 text-emerald-400 mb-2">
-                        <MapPin className="h-4 w-4" />
-                        <span className="text-xs font-mono uppercase tracking-widest text-white/90">
-                            {activeDestination.name}
-                        </span>
+                {/* Stacked Images for Smooth Cross-Fade */}
+                {destinations.map((destination) => (
+                    <div
+                        key={destination.id}
+                        className={`absolute inset-0 h-full w-full transition-opacity duration-700 ease-in-out ${
+                            activeId === destination.id 
+                                ? "opacity-100 z-10" 
+                                : "opacity-0 z-0 pointer-events-none"
+                        }`}
+                    >
+                        <Image
+                            src={destination.image}
+                            alt={destination.name}
+                            fill
+                            className="object-cover"
+                            priority={destination.id === 1}
+                        />
+                        
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90" />
+                        
+                        <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full">
+                            <div className="flex items-center gap-2 text-emerald-400 mb-2">
+                                <MapPin className="h-4 w-4" />
+                                <span className="text-xs font-mono uppercase tracking-widest text-white/90">
+                                    {destination.name}
+                                </span>
+                            </div>
+                            <p className="text-lg md:text-xl font-light text-white leading-snug max-w-md drop-shadow-md">
+                                {destination.description}
+                            </p>
+                        </div>
                     </div>
-                    <p className="text-lg md:text-xl font-light text-white leading-snug max-w-md drop-shadow-md">
-                        {activeDestination.description}
-                    </p>
-                </div>
+                ))}
 
-                {/* Corner Decoration */}
-                <div className="absolute top-6 right-6 h-12 w-12 border-t border-r border-white/30" />
+                <div className="absolute top-6 right-6 h-12 w-12 border-t border-r border-white/30 z-20" />
             </div>
           </div>
 
