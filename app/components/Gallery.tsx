@@ -12,60 +12,47 @@ gsap.registerPlugin(ScrollTrigger);
 const galleryItems = [
   {
     id: 1,
-    src: "/Gallery/IMG_8052.jpg",
+    src: "/Gallery/Knuckles.webp",
     alt: "Breathtaking view from Villa 95 overlooking the Knuckles mountain range",
     caption: "Waking up to mountain magic.",
     span: "md:col-span-2 md:row-span-2",
   },
   {
     id: 2,
-    src: "/Gallery/IMG_E0727.jpg",
+    src: "/Gallery/Sunrise.webp",
     alt: "Exterior view of Villa 95",
     caption: "Your home in the clouds.",
     span: "md:col-span-1 md:row-span-1",
   },
   {
     id: 3,
-    src: "/Gallery/XAMR4680.JPG",
+    src: "/Gallery/Tree.webp",
     alt: "Scenic landscape of the surrounding area",
     caption: "Gateway to the Knuckles wilderness.",
     span: "md:col-span-1 md:row-span-2",
   },
   {
     id: 4,
-    src: "/Gallery/IMG_E7487.jpg",
+    src: "/Gallery/rangalapool.webp",
     alt: "Vertical view of the mountain layers",
     caption: "Layers of mist and mountain.",
     span: "md:row-span-2",
   },
   {
     id: 5,
-    src: "/Gallery/IMG_6962.jpg",
+    src: "/Gallery/scenic.webp",
     alt: "Another stunning view from the villa",
     caption: "Infinite horizons.",
     span: "md:col-span-1",
   },
   {
     id: 6,
-    src: "/Gallery/IMG_E6847.jpg",
+    src: "/Gallery/horizon.webp",
     alt: "Interior or detail shot of Villa 95",
     caption: "Immersed in emerald greenery.",
     span: "md:col-span-2 md:row-span-1",
   },
-  {
-    id: 7,
-    src: "/Gallery/IMG_0757.jpg",
-    alt: "Another beautiful angle of the villa gardens",
-    caption: "The art of slow living.",
-    span: "md:col-span-1 md:row-span-1",
-  },
-  {
-    id: 8,
-    src: "/Gallery/IMG_E0567.jpg",
-    alt: "Close-up of the misty mountains",
-    caption: "Whispers of the wind.",
-    span: "md:col-span-1 md:row-span-1",
-  },
+
 ];
 
 export default function Gallery() {
