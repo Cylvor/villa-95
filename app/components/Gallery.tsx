@@ -99,12 +99,12 @@ export default function Gallery() {
         
         {/* --- Header --- */}
         <div className="gallery-header mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div className="max-w-xl">
+          <div className="max-w-xl mx-auto md:mx-0 text-center md:text-left">
             <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
               Visual Diary
             </span>
-            <h2 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900">
-              A glimpse into <br /> mountain life.
+            <h2 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900 text-center md:text-left md:whitespace-nowrap">
+              A glimpse into mountain life.
             </h2>
           </div>
           
