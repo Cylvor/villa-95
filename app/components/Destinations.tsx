@@ -79,7 +79,7 @@ const destinations = [
 
 export default function Destinations() {
   const [activeId, setActiveId] = useState(1);
-  // MOBILE FIX: Initialize with 1 (or destinations[0].id) to show the first image by default
+  // Default to 1 so the first image shows immediately on mobile
   const [mobileHoverId, setMobileHoverId] = useState<number | null>(1);
 
   return (
@@ -112,11 +112,13 @@ export default function Destinations() {
             <div className="flex flex-col">
               {destinations.map((item) => (
                 <div key={item.id} className="relative">
+                  
+                  {/* Item Button (Name) */}
                   <button
                     onMouseEnter={() => setActiveId(item.id)}
                     onClick={() => {
                       setActiveId(item.id);
-                      // Toggle: if clicking the open one, close it; otherwise open new one
+                      // Toggle logic: If clicking the open one, close it. If new one, open new one.
                       setMobileHoverId(mobileHoverId === item.id ? null : item.id);
                     }}
                     className={`group relative flex items-center justify-between w-full py-8 transition-all duration-300 border-b border-stone-200 ${
@@ -148,26 +150,37 @@ export default function Destinations() {
                     />
                   </button>
                   
-                  {/* --- MOBILE IMAGE DROPDOWN --- */}
-                  {/* Only renders if mobileHoverId matches. 
-                      'animate-in slide-in-from-top-4' gives the "coming down" effect.
+                  {/* --- MOBILE IMAGE ACCORDION --- */}
+                  {/* Using CSS Grid Transition Trick:
+                     grid-rows-[1fr] = Open
+                     grid-rows-[0fr] = Closed
+                     This animates height smoothly so content doesn't "jump" up instantly.
                   */}
-                  {mobileHoverId === item.id && (
-                    <div className="lg:hidden mt-4 mb-8 relative h-64 w-full overflow-hidden rounded-sm bg-stone-200 shadow-md animate-in fade-in slide-in-from-top-4 duration-500 origin-top ease-out">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute bottom-0 left-0 p-4 w-full">
-                        <p className="text-sm font-light text-white leading-snug">
-                          {item.description}
-                        </p>
-                      </div>
+                  <div 
+                    className={`lg:hidden grid transition-all duration-500 ease-in-out ${
+                      mobileHoverId === item.id 
+                        ? "grid-rows-[1fr] opacity-100 mb-8 mt-4" 
+                        : "grid-rows-[0fr] opacity-0 mb-0 mt-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden min-h-0">
+                        <div className="relative h-64 w-full rounded-sm bg-stone-200 shadow-md">
+                            <Image
+                                src={item.image}
+                                alt={item.name}
+                                fill
+                                className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                            <div className="absolute bottom-0 left-0 p-4 w-full">
+                                <p className="text-sm font-light text-white leading-snug">
+                                    {item.description}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                  )}
+                  </div>
+
                 </div>
               ))}
             </div>
@@ -177,7 +190,7 @@ export default function Destinations() {
           <div className="hidden lg:block order-1 lg:order-2 lg:w-7/12 w-full lg:sticky lg:top-32 h-[50vh] lg:h-[75vh]">
             <div className="relative h-full w-full overflow-hidden rounded-sm bg-stone-900 shadow-lg">
                 
-                {/* Stacked Images for Smooth Cross-Fade */}
+                {/* Desktop Images (Stacked for Cross-Fade) */}
                 {destinations.map((destination) => (
                     <div
                         key={destination.id}
