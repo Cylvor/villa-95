@@ -52,12 +52,11 @@ export default function Rooms() {
           loop
           muted
           playsInline
-          className="h-full w-full object-cover opacity-100 md:opacity-60"
+          className="h-full w-full object-cover opacity-100"
         >
           <source src="/Room.mp4" type="video/mp4" />
         </video>
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-50 via-transparent to-transparent md:bg-gradient-to-r md:from-stone-900/90 md:via-stone-900/20" />
+        
       </div>
 
       {/* 2. CONTENT SECTION 
