@@ -54,7 +54,7 @@ export default function Rooms() {
           playsInline
           className="h-full w-full object-cover opacity-100"
         >
-          <source src="/Room.mp4" type="video/mp4" />
+          <source src="/Videos/Room.mp4" type="video/mp4" />
         </video>
         
       </div>

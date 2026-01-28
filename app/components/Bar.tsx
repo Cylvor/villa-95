@@ -75,7 +75,7 @@ export default function Bar() {
             playsInline
             className="h-full w-full object-cover"
         >
-            <source src="/Bar.mp4" type="video/mp4" />
+            <source src="/Videos/Bar.mp4" type="video/mp4" />
         </video>
 
         {/* Subtle dark overlay so text remains legible (not too dark) */}

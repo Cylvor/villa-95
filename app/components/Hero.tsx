@@ -60,7 +60,7 @@ export default function Hero() {
           playsInline
           className="h-full w-full object-cover"
         >
-          <source src="/rangala.mp4" type="video/mp4" />
+          <source src="/Videos/rangala.mp4" type="video/mp4" />
         </video>
         {/* Elegant Dark Overlay */}
         <div className="absolute inset-0 bg-black/50" />
