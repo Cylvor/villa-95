@@ -11,7 +11,6 @@ const rooms = [
     name: "The Sky Studio",
     tagline: "For Couples & Solo Travelers",
     description: "An intimate sanctuary perched on the edge of the ridge. Designed for romance and solitude, this studio features a wall of glass that opens onto a private balcony, blurring the line between your bed and the clouds.",
-    price: "From $55",
     image: "/couple-room.jpg", 
     images: [
       "/Images/V95_Rooms (19).webp",
@@ -33,7 +32,6 @@ const rooms = [
     name: "The Mountain Suite",
     tagline: "For Families & Groups",
     description: "A sprawling apartment-style suite designed for connection. With a separate living area, full kitchenette, and expansive terrace, it gives your family the freedom to live, cook, and relax together in absolute comfort.",
-    price: "From $85",
     image: "/family-room.jpg",
     images: [
       "/Images/Family/V95_Rooms (1).webp",
@@ -218,12 +216,8 @@ export default function RoomTypes() {
                     ))}
                 </div>
 
-                {/* Price & CTA - Centered on Mobile */}
+                {/* CTA - Centered on Mobile */}
                 <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 justify-center lg:justify-start w-full">
-                  <div>
-                    <span className="block text-xs text-stone-400">Starting from</span>
-                    <span className="text-2xl font-serif text-emerald-800">{room.price}</span>
-                  </div>
                   <a
                     href="https://www.booking.com/hotel/lk/villa-95-kandy.html"
                     target="_blank"
