@@ -12,47 +12,59 @@ gsap.registerPlugin(ScrollTrigger);
 const galleryItems = [
   {
     id: 1,
-    src: "/gallery-hero-view.jpg", // Replace with your best view shot
-    alt: "Infinity pool overlooking the Knuckles mountain range",
-    caption: "Swimming above the clouds.",
-    span: "md:col-span-2 md:row-span-2", // Big Hero Image
+    src: "/Gallery/IMG_8052.jpg",
+    alt: "Breathtaking view from Villa 95 overlooking the Knuckles mountain range",
+    caption: "Waking up to mountain magic.",
+    span: "md:col-span-2 md:row-span-2",
   },
   {
     id: 2,
-    src: "/gallery-food.jpg", // Replace with food shot
-    alt: "Authentic Sri Lankan curry served on the terrace",
-    caption: "Farm-to-table authentic flavors.",
-    span: "md:col-span-1 md:row-span-1", // Standard Square
+    src: "/Gallery/IMG_E0727.jpg",
+    alt: "Exterior view of Villa 95",
+    caption: "Your home in the clouds.",
+    span: "md:col-span-1 md:row-span-1",
   },
   {
     id: 3,
-    src: "/gallery-nature.jpg", // Replace with hiking/nature shot
-    alt: "Hiking trail near the villa",
+    src: "/Gallery/XAMR4680.JPG",
+    alt: "Scenic landscape of the surrounding area",
     caption: "Gateway to the Knuckles wilderness.",
-    span: "md:col-span-1 md:row-span-2", // Tall Portrait
+    span: "md:col-span-1 md:row-span-2",
   },
-  // NEW ITEM 1: Portrait to fill the first empty space
   {
     id: 4,
-    src: "/gallery-portrait-new.jpg", // Replace with a new portrait shot
+    src: "/Gallery/IMG_E7487.jpg",
     alt: "Vertical view of the mountain layers",
     caption: "Layers of mist and mountain.",
-    span: "md:row-span-2", // Tall Portrait
+    span: "md:row-span-2",
   },
-  // NEW ITEM 2: Standard Square to fill the second empty space
   {
     id: 5,
-    src: "/gallery-square-new.jpg", // Replace with a new square shot
-    alt: "Close-up of a native flower in the garden",
-    caption: "Rare blooms in the cloud forest.",
-    span: "md:col-span-1", // Standard Square
+    src: "/Gallery/IMG_6962.jpg",
+    alt: "Another stunning view from the villa",
+    caption: "Infinite horizons.",
+    span: "md:col-span-1",
   },
   {
     id: 6,
-    src: "/gallery-garden.jpg", // Replace with garden/exterior shot
-    alt: "Lush gardens surrounding Villa 95",
+    src: "/Gallery/IMG_E6847.jpg",
+    alt: "Interior or detail shot of Villa 95",
     caption: "Immersed in emerald greenery.",
-    span: "md:col-span-2 md:row-span-1", // Wide Landscape
+    span: "md:col-span-2 md:row-span-1",
+  },
+  {
+    id: 7,
+    src: "/Gallery/IMG_0757.jpg",
+    alt: "Another beautiful angle of the villa gardens",
+    caption: "The art of slow living.",
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    id: 8,
+    src: "/Gallery/IMG_E0567.jpg",
+    alt: "Close-up of the misty mountains",
+    caption: "Whispers of the wind.",
+    span: "md:col-span-1 md:row-span-1",
   },
 ];
 
