@@ -74,7 +74,7 @@ export default function Hero() {
         </span>
         
         <h1 className="text-center font-serif text-5xl md:text-7xl lg:text-8xl text-white drop-shadow-2xl">
-          The Sanctuary
+          Villa 95 RANGALA
         </h1>
         
         {/* Decorative Line */}
