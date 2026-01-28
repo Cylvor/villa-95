@@ -188,7 +188,7 @@ export default function Reviews() {
                                 {review.tag}
                                 </span>
                                 <p className="mb-8 text-sm md:text-base font-light leading-relaxed text-stone-600 italic">
-                                "{review.text}"
+                                &quot;{review.text}&quot;
                                 </p>
                             </div>
 

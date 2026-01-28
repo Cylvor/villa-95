@@ -90,16 +90,16 @@ export default function Destinations() {
       <div className="mx-auto max-w-7xl">
         
         {/* --- Header --- */}
-        <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-stone-200 pb-8">
-          <div>
+        <div className="mb-16 md:mb-24 flex flex-col md:flex-row items-center md:items-end justify-between gap-6 border-b border-stone-200 pb-8">
+          <div className="text-center md:text-left">
             <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
               Explore the Surroundings
             </span>
             <h2 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900">
-              Beyond the <br /> Villa Walls
+              Beyond the <br className="md:hidden" /> Villa Walls
             </h2>
           </div>
-          <p className="max-w-xs text-sm text-stone-500 leading-relaxed pb-2">
+          <p className="max-w-xs text-sm text-stone-500 leading-relaxed pb-2 text-center md:text-left mx-auto md:mx-0">
             Discover the raw beauty of the Knuckles Mountain Range, from hidden waterfalls to ancient villages.
           </p>
         </div>

@@ -44,15 +44,17 @@ export default function Amenities() {
       <div className="mx-auto max-w-7xl">
         
         {/* --- Header --- */}
-        <div className="mb-16 max-w-2xl">
-          <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
-            Curated Comforts
-          </span>
-          <h2 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900 mb-6">
-            Everything you need, <br />
-            <span className="font-serif italic text-stone-500">nothing you don't.</span>
-          </h2>
-          <p className="text-stone-500 leading-relaxed">
+        <div className="mb-16 md:mb-24 flex flex-col md:flex-row items-center md:items-end justify-between gap-6 border-b border-stone-200 pb-8">
+          <div className="text-center md:text-left">
+            <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
+              Curated Comforts
+            </span>
+            <h2 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900">
+              Everything you need, <br className="md:hidden" />
+              <span className="font-serif italic text-stone-500">nothing you don't.</span>
+            </h2>
+          </div>
+          <p className="max-w-xs text-sm text-stone-500 leading-relaxed pb-2 text-center md:text-left mx-auto md:mx-0">
             We prioritize the essentials that make a mountain stay comfortable, without cluttering your experience.
           </p>
         </div>
