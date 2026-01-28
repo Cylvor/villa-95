@@ -16,10 +16,10 @@ const diningFeatures = [
 ];
 
 const diningImages = [
-  "/Images/Foods/V95_Detailshots (1).png",
-  "/Images/Foods/V95_Detailshots (2).png",
-  "/Images/Foods/V95_Detailshots (3).png",
-  "/Images/Foods/V95_Detailshots (4).png",
+  "/Images/Foods/V95_Food_1.webp",
+  "/Images/Foods/V95_Food_2.webp",
+  "/Images/Foods/V95_Food_3.webp",
+  "/Images/Foods/V95_Food_4.webp",
 ];
 
 export default function Dining() {
@@ -191,7 +191,7 @@ export default function Dining() {
                     Must Try
                 </p>
                 <p className="text-sm font-serif italic text-stone-900">
-                    &quot;Al Fresco breakfast with a view of the waterfalls."
+                    &quot;Al Fresco breakfast with a view of the waterfalls.&quot;
                 </p>
              </div>
           </div>
