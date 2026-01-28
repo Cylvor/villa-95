@@ -16,7 +16,7 @@ const highlights = [
   {
     icon: Wifi,
     title: "Modern Amenities",
-    description: "High-speed Wi-Fi, full kitchen, and washing facilities.",
+    description: "High-speed Wi-Fi, premium bedding, and washing facilities.",
   },
   {
     icon: Utensils,

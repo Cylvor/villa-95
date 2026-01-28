@@ -12,7 +12,7 @@ const amenities = [
   { icon: Sun, label: "Private Terraces", text: "Panoramic views in every unit." },
   { icon: BedDouble, label: "King Beds", text: "Premium linens & comfort." },
   { icon: Bath, label: "Hot Water", text: "Private modern bathrooms." },
-  { icon: Coffee, label: "Full Kitchen", text: "Cook your own meals." },
+  { icon: Coffee, label: "Tea & Coffee", text: "In-room refreshment." },
   { icon: Waves, label: "Laundry", text: "Washing machine included." },
 ];
 
@@ -118,7 +118,7 @@ export default function Rooms() {
               </h3>
               <p className="text-sm md:text-base text-stone-500 leading-relaxed">
                   Whether you are here for a weekend or a month, you have everything you need. 
-                  Cook your favorite meals in your <strong>fully equipped kitchen</strong>, use the 
+                  Enjoy delicious meals from our <strong>in-house restaurant</strong>, use the 
                   <strong> washing machine</strong> to refresh your hiking gear, and stay connected with 
                   high-speed fiber Wi-Fi.
               </p>

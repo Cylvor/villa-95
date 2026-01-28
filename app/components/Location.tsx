@@ -72,7 +72,7 @@ export default function Location() {
                   <p className="mt-1 text-base text-stone-600 font-light leading-relaxed">
 
 
-                    No.95 Bobebila Makuldeniya Rd, <br />
+                    No.95 Bobabila Makuldeniya Rd, <br />
                     Kandy 20921, Sri Lanka
                   </p>
                 </div>
