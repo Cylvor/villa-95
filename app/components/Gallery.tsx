@@ -47,7 +47,7 @@ const galleryItems = [
   },
   {
     id: 6,
-    src: "/Gallery/horizon.webp",
+    src: "/Gallery/mountainview.webp",
     alt: "Interior or detail shot of Villa 95",
     caption: "Immersed in emerald greenery.",
     span: "md:col-span-2 md:row-span-1",
