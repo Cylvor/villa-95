@@ -59,13 +59,13 @@ export default function PrivacyPolicyPage() {
                 Property: <span className="font-medium text-stone-800">Villa 95 Rangala</span>
               </p>
               <p>
-                Address: No.95 Bobebila Makuldeniya Rd, Kandy 20921, Sri Lanka
+                Address: No.95 Bobabila Makuldeniya Rd, Kandy 20921, Sri Lanka
               </p>
               <p>
                 Email: <a className="underline hover:text-emerald-700" href="mailto:info@villa95.com">info@villa95.com</a>
               </p>
               <p>
-                Phone: <a className="underline hover:text-emerald-700" href="tel:+94770000000">+94 77 000 0000</a>
+                Phone: <a className="underline hover:text-emerald-700" href="tel:+94773864650">+94 77 386 4650</a>
               </p>
               <p>
                 WhatsApp: <a className="underline hover:text-emerald-700" href="https://wa.me/94773864650" target="_blank" rel="noopener noreferrer">+94 77 386 4650</a>

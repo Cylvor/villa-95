@@ -54,7 +54,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 shrink-0 text-emerald-600 mt-1" />
                 <span>
-                  No.95 Bobebila Makuldeniya Rd, <br />
+                  No.95 Bobabila Makuldeniya Rd, <br />
                   Kandy 20921, Sri Lanka
                 </span>
               </li>
@@ -66,8 +66,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 shrink-0 text-emerald-600" />
-                <a href="tel:+94770000000" className="hover:text-white transition-colors">
-                  +94 77 000 0000
+                <a href="tel:+94773864650" className="hover:text-white transition-colors">
+                  +94 77 386 4650
                 </a>
               </li>
               <li className="pt-2">

@@ -31,7 +31,7 @@ const rooms = [
     number: "02",
     name: "The Mountain Suite",
     tagline: "For Families & Groups",
-    description: "A sprawling apartment-style suite designed for connection. With a separate living area, full kitchenette, and expansive terrace, it gives your family the freedom to live, cook, and relax together in absolute comfort.",
+    description: "A sprawling apartment-style suite designed for connection. With a separate living area, private dining space, and expansive terrace, it gives your family the freedom to live and relax together in absolute comfort.",
     image: "/family-room.jpg",
     images: [
       "/Images/Family/V95_Rooms (1).webp",
@@ -45,7 +45,7 @@ const rooms = [
       { icon: BedDouble, text: "2 Queen Beds" },
       { icon: Maximize, text: "80 m²" },
     ],
-    highlights: ["Full Kitchenette", "Living Room", "Dining Area", "Large Terrace"],
+    highlights: ["Dining Area", "Living Room", "Large Terrace", "Fiber Wi-Fi"],
   },
 ];
 
