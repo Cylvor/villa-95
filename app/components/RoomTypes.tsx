@@ -13,11 +13,11 @@ const rooms = [
     description: "An intimate sanctuary perched on the edge of the ridge. Designed for romance and solitude, this studio features a wall of glass that opens onto a private balcony, blurring the line between your bed and the clouds.",
     image: "/couple-room.jpg", 
     images: [
-      "/Images/V95_Rooms (19).webp",
-      "/Images/V95_Rooms (20).webp",
-      "/Images/V95_Rooms (5).webp",
-      "/Images/V95_Rooms (21).webp",
-      "/Images/V95_Rooms (18).webp",
+      "/Images/Single/V95_Single_Rooms_1.webp",
+      "/Images/Single/V95_Single_Rooms_2.webp",
+      "/Images/Single/V95_Single_Rooms_3.webp",
+      "/Images/Single/V95_Single_Rooms_4.webp",
+      "/Images/Single/V95_Single_Rooms_5.webp",
     ],
     features: [
       { icon: User, text: "2 Adults" },
