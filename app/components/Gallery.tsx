@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -58,6 +58,31 @@ const galleryItems = [
 export default function Gallery() {
   const container = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const [activeId, setActiveId] = useState<number | null>(null);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // Treat devices with no hover or a coarse pointer as "touch" for tap interactions.
+    const mq = window.matchMedia("(hover: none), (pointer: coarse)");
+
+    const sync = () => {
+      setIsTouch(mq.matches);
+      if (!mq.matches) setActiveId(null);
+    };
+
+    sync();
+
+    mq.addEventListener?.("change", sync);
+    // Older Safari
+    mq.addListener?.(sync);
+
+    return () => {
+      mq.removeEventListener?.("change", sync);
+      mq.removeListener?.(sync);
+    };
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -94,6 +119,10 @@ export default function Gallery() {
       id="gallery"
       ref={container}
       className="relative w-full bg-white px-6 py-24 md:px-12 md:py-32 text-stone-900"
+      onClick={() => {
+        if (!isTouch) return;
+        setActiveId(null);
+      }}
     >
       <div className="mx-auto max-w-7xl">
         
@@ -124,10 +153,25 @@ export default function Gallery() {
             className="grid grid-cols-1 md:grid-cols-3 auto-rows-[250px] gap-4 md:gap-6"
         >
             {galleryItems.map((item) => (
+                // On touch devices: tap toggles the caption overlay.
                 <div 
                     key={item.id}
                     // Apply the specific span class for each item to create the mosaic look
                     className={`gallery-item group relative overflow-hidden rounded-lg bg-stone-200 ${item.span}`}
+                    role={isTouch ? "button" : undefined}
+                    tabIndex={isTouch ? 0 : undefined}
+                    aria-pressed={isTouch ? activeId === item.id : undefined}
+                    onClick={(e) => {
+                      if (!isTouch) return;
+                      e.stopPropagation();
+                      setActiveId((prev) => (prev === item.id ? null : item.id));
+                    }}
+                    onKeyDown={(e) => {
+                      if (!isTouch) return;
+                      if (e.key !== "Enter" && e.key !== " ") return;
+                      e.preventDefault();
+                      setActiveId((prev) => (prev === item.id ? null : item.id));
+                    }}
                 >
                     {/* Image with Hover Zoom */}
                     <Image
@@ -135,12 +179,25 @@ export default function Gallery() {
                         alt={item.alt}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        className={
+                          "object-cover transition-transform duration-700 ease-out md:group-hover:scale-105" +
+                          (isTouch && activeId === item.id ? " scale-105" : "")
+                        }
                     />
                     
                     {/* Hover Overlay & Caption */}
-                    <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/40">
-                        <div className="absolute bottom-0 left-0 p-6 opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                    <div
+                      className={
+                        "absolute inset-0 bg-black/0 transition-all duration-300 md:group-hover:bg-black/40" +
+                        (isTouch && activeId === item.id ? " bg-black/40" : "")
+                      }
+                    >
+                        <div
+                          className={
+                            "absolute bottom-0 left-0 p-6 opacity-0 translate-y-4 transition-all duration-500 md:group-hover:opacity-100 md:group-hover:translate-y-0" +
+                            (isTouch && activeId === item.id ? " opacity-100 translate-y-0" : "")
+                          }
+                        >
                             <p className="text-white text-lg font-serif italic leading-tight">
                                 {item.caption}
                             </p>
