@@ -103,15 +103,13 @@ export default function Footer() {
             <p className="text-sm text-stone-500">
               Ready to escape? Check availability and rates instantly.
             </p>
-            <a
-              href="https://www.booking.com/hotel/lk/villa-95-kandy.html"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/reservations"
               className="inline-flex items-center gap-2 bg-white text-stone-900 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-emerald-600 hover:text-white transition-all duration-300 group"
             >
               Check Availability
               <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
+            </Link>
           </div>
         </div>
 
