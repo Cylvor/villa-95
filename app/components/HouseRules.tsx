@@ -1,11 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Clock, Baby, PawPrint, VolumeX, CreditCard, Info } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const rules = [
   {
@@ -41,35 +36,14 @@ const rules = [
 ];
 
 export default function HouseRules() {
-  const container = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".rule-card", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top 85%",
-        },
-      });
-    }, container);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
       id="house-rules"
-      ref={container}
       className="relative w-full bg-stone-50 px-6 py-20 md:py-24"
     >
       <div className="mx-auto max-w-7xl">
         
-        {/* --- Header (UNCHANGED) --- */}
+        {/* --- Header --- */}
         <div className="mb-16 text-center">
           <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
             Good to Know
@@ -80,13 +54,12 @@ export default function HouseRules() {
         </div>
 
         {/* --- Grid --- */}
-        {/* Added 'items-stretch' implicitly by using Grid, ensuring equal height rows */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {rules.map((rule, idx) => (
             <div
               key={idx}
               className="
-                rule-card group h-full
+                group h-full
                 flex flex-col items-start gap-4 
                 p-8 rounded-xl bg-white 
                 border border-stone-100 shadow-sm 
@@ -108,7 +81,6 @@ export default function HouseRules() {
                 <h3 className="text-base font-bold uppercase tracking-wide text-stone-900 mb-3 group-hover:text-emerald-900 transition-colors">
                   {rule.title}
                 </h3>
-                {/* 'flex-grow' ensures the description pushes any bottom content down evenly if we added footers */}
                 <p className="text-sm font-light leading-relaxed text-stone-500">
                   {rule.text}
                 </p>
