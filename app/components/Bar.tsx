@@ -36,16 +36,8 @@ export default function Bar() {
       <div className="order-1 relative z-10 w-full px-6 py-20 bg-stone-50 md:absolute md:inset-0 md:bg-transparent md:flex md:items-center md:justify-center md:py-0 md:order-none">
         <div className="bar-content max-w-2xl text-center text-stone-900 md:text-white">
           
-          {/* Label */}
-          <div className="mb-6 flex justify-center">
-            <span className="flex items-center gap-2 rounded-full border border-emerald-700/40 bg-emerald-700 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white backdrop-blur-sm">
-              <Sparkles className="h-3 w-3 text-white" />
-              Open Evenings
-            </span>
-          </div>
-
           {/* Title - Changed to Dark */}
-          <h2 className="mb-6 font-serif text-5xl md:text-7xl">
+          <h2 className="mb-4 font-serif text-5xl md:text-7xl">
             The Cloud Bar
           </h2>
 
@@ -89,7 +81,7 @@ export default function Bar() {
 // Helper Component - Styled for Light Theme
 function Feature({ icon: Icon, title, desc }: { icon: any, title: string, desc: string }) {
   return (
-    <div className="flex flex-col items-center rounded-lg border border-stone-200 bg-white p-4 shadow-sm transition-all hover:border-emerald-500 hover:shadow-md">
+    <div className="flex flex-col items-center rounded-lg border border-stone-200/60 bg-white/80 p-4 shadow-sm transition-all hover:border-emerald-500 hover:shadow-md">
       <Icon className="mb-3 h-5 w-5 text-emerald-600" />
       <span className="mb-1 block text-sm font-bold uppercase tracking-wide text-stone-900">
         {title}

@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const diningFeatures = [
   { icon: Utensils, label: "Global Cuisine", desc: "Chinese, Indian & Western" },
-  { icon: Sun, label: "Al Fresco Terrace", desc: "Breakfast with a view" },
+  { icon: Sun, label: "Open Terrace", desc: "Breakfast with a view" },
   { icon: Wine, label: "The Bar", desc: "Beer & Evening Drinks" },
   { icon: ChefHat, label: "Freshly Prepared", desc: "Made to order daily" },
 ];
@@ -191,7 +191,7 @@ export default function Dining() {
                     Must Try
                 </p>
                 <p className="text-sm font-serif italic text-stone-900">
-                    &quot;Al Fresco breakfast with a view of the waterfalls.&quot;
+                    &quot;Breakfast with a view of the waterfalls.&quot;
                 </p>
              </div>
           </div>
