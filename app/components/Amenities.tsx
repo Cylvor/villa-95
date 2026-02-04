@@ -51,7 +51,7 @@ export default function Amenities() {
             </span>
             <h2 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900">
               Everything you need, <br className="md:hidden" />
-              <span className="font-serif italic text-stone-500">nothing you don't.</span>
+              <span className="font-serif italic text-stone-500">nothing you don&apos;t.</span>
             </h2>
           </div>
           <p className="max-w-xs text-sm text-stone-500 leading-relaxed pb-2 text-center md:text-left mx-auto md:mx-0">

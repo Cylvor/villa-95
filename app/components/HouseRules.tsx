@@ -69,7 +69,7 @@ export default function HouseRules() {
     >
       <div className="mx-auto max-w-7xl">
         
-        {/* --- Header --- */}
+        {/* --- Header (UNCHANGED) --- */}
         <div className="mb-16 text-center">
           <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
             Good to Know
@@ -80,20 +80,35 @@ export default function HouseRules() {
         </div>
 
         {/* --- Grid --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {/* Added 'items-stretch' implicitly by using Grid, ensuring equal height rows */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {rules.map((rule, idx) => (
             <div
               key={idx}
-              className="rule-card flex items-start gap-4 p-6 rounded-xl bg-white border border-stone-100 shadow-sm transition-shadow hover:shadow-md"
+              className="
+                rule-card group h-full
+                flex flex-col items-start gap-4 
+                p-8 rounded-xl bg-white 
+                border border-stone-100 shadow-sm 
+                transition-all duration-300 
+                hover:shadow-lg hover:-translate-y-1 hover:border-emerald-500/30
+              "
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-stone-50 text-emerald-700">
-                <rule.icon className="h-5 w-5" />
+              {/* Icon */}
+              <div className="
+                flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-stone-50 
+                text-emerald-700 transition-colors duration-300 
+                group-hover:bg-emerald-50 group-hover:scale-110
+              ">
+                <rule.icon className="h-6 w-6" strokeWidth={1.5} />
               </div>
               
-              <div>
-                <h3 className="text-sm font-bold uppercase tracking-wide text-stone-900 mb-2">
+              {/* Text Content */}
+              <div className="flex flex-col">
+                <h3 className="text-base font-bold uppercase tracking-wide text-stone-900 mb-3 group-hover:text-emerald-900 transition-colors">
                   {rule.title}
                 </h3>
+                {/* 'flex-grow' ensures the description pushes any bottom content down evenly if we added footers */}
                 <p className="text-sm font-light leading-relaxed text-stone-500">
                   {rule.text}
                 </p>
