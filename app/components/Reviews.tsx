@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Quote, Star, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { Quote, Star, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,10 +61,26 @@ const reviews = [
   },
 ];
 
+const awards = [
+  {
+    id: "booking-award",
+    src: "/Images/Awarde/Awarde.webp",
+    alt: "Villa 95 award",
+  },
+];
+
+type Award = (typeof awards)[number];
+
 export default function Reviews() {
   const container = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeAward, setActiveAward] = useState<Award | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -80,6 +98,26 @@ export default function Reviews() {
     }, container);
     return () => ctx.revert();
   }, []);
+
+  useEffect(() => {
+    if (!activeAward) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveAward(null);
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [activeAward]);
+
+  useEffect(() => {
+    if (!activeAward) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [activeAward]);
 
   // Slide Animation Logic
   useEffect(() => {
@@ -235,7 +273,84 @@ export default function Reviews() {
             </a>
         </div>
 
+        {/* --- Awards (inline, not a card) --- */}
+        <div className="mt-14 flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
+          {/* Left: Title */}
+          <div className="flex-shrink-0">
+            <h3 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900">
+              Recognized by <br /> our guests.
+            </h3>
+          </div>
+
+          {/* Middle: Awards label + images (centered in remaining space) */}
+          <div className="flex-1 flex flex-col items-center">
+            <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
+              Awards
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              {awards.map((award) => (
+                <button
+                  key={award.id}
+                  type="button"
+                  onClick={() => setActiveAward(award)}
+                  className="group relative focus:outline-none"
+                  aria-label={`Open award: ${award.alt}`}
+                >
+                  <div className="relative h-24 w-44 md:h-28 md:w-56">
+                    <Image
+                      src={award.src}
+                      alt={award.alt}
+                      fill
+                      sizes="(max-width: 768px) 176px, 224px"
+                      className="object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                      priority={false}
+                    />
+                  </div>
+                  <div className="absolute -inset-2 rounded-xl bg-emerald-700/0 transition-colors group-hover:bg-emerald-700/5" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
       </div>
+
+      {/* --- Award Popup (portal so it's centered in viewport) --- */}
+      {isMounted &&
+        activeAward &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 px-4"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Award preview"
+            onMouseDown={(e) => {
+              if (e.target === e.currentTarget) setActiveAward(null);
+            }}
+          >
+            <div className="relative w-full max-w-3xl">
+              <button
+                type="button"
+                onClick={() => setActiveAward(null)}
+                className="absolute -top-12 right-0 inline-flex items-center justify-center rounded-full bg-white/95 p-2 text-stone-900 shadow-sm backdrop-blur transition-colors hover:bg-white"
+                aria-label="Close"
+              >
+                <X className="h-5 w-5" />
+              </button>
+
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-white">
+                <Image
+                  src={activeAward.src}
+                  alt={activeAward.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-contain p-6"
+                />
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
     </section>
   );
 }
