@@ -67,6 +67,7 @@ export default function ReservationsPage() {
       ratingLabel: "Superb",
       reviews: "100+ reviews",
       url: "https://www.booking.com/hotel/lk/villa-95-kandy.en-gb.html",
+      disabled: false,
       features: [
         "Instant Confirmation",
         "Free Cancellation Available",
@@ -85,6 +86,7 @@ export default function ReservationsPage() {
       ratingLabel: "Excellent",
       reviews: "Verified Reviews",
       url: "https://www.tripadvisor.com/Hotel_Review-g304138-d32968471-Reviews-Villa_95_Rangala-Kandy_Kandy_District_Central_Province.html",
+      disabled: false,
       features: [
         "Traveler Verified Reviews",
         "Photo Galleries",
@@ -103,6 +105,7 @@ export default function ReservationsPage() {
       ratingLabel: "Highly Rated",
       reviews: "Google Reviews",
       url: "https://share.google/x1xq76In5X6bNQfmy",
+      disabled: false,
       features: [
         "Compare All Prices",
         "See Multiple Platforms",
