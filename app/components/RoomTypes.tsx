@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { User, BedDouble, Maximize, ArrowRight, Check, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -218,15 +219,13 @@ export default function RoomTypes() {
 
                 {/* CTA - Centered on Mobile */}
                 <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 justify-center lg:justify-start w-full">
-                  <a
-                    href="https://www.booking.com/hotel/lk/villa-95-kandy.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="/reservations"
                     className="group flex h-12 items-center gap-3 rounded-full bg-stone-900 px-8 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-emerald-700"
                   >
                     Book Now
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

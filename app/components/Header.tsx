@@ -94,10 +94,8 @@ export default function Header() {
               </Link>
             ))}
 
-            <a
-              href="https://www.booking.com/hotel/lk/villa-95-kandy.html"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/reservations"
               className={`group flex items-center gap-2 rounded-full px-5 py-2.5 transition-all ${
                 isScrolled
                   ? "bg-stone-900 text-white hover:bg-emerald-700"
@@ -108,15 +106,13 @@ export default function Header() {
                 Book Now
               </span>
               <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
+            </Link>
           </nav>
 
           {/* MOBILE ACTIONS (Book + Hamburger) */}
           <div className="flex items-center gap-3 md:hidden">
-            <a
-              href="https://www.booking.com/hotel/lk/villa-95-kandy.html"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/reservations"
               className={`
                 flex items-center gap-1 rounded-full px-4 py-2 transition-all shadow-sm
                 ${isScrolled
@@ -128,7 +124,7 @@ export default function Header() {
               <span className="text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">
                 Book Now
               </span>
-            </a>
+            </Link>
 
             {/* OPEN BUTTON (Only visible when menu is CLOSED) */}
             <button
