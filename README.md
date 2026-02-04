@@ -16,6 +16,24 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Environment Variables
+
+Create a `.env.local` file (not committed) and set:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://villa95rangala.com
+```
+
+This is used to generate correct absolute URLs for metadata and SEO routes (e.g. `sitemap.xml`).
+
+## SEO Routes
+
+This project exposes these routes via Next.js metadata routes:
+
+- `/robots.txt`
+- `/sitemap.xml`
+- `/manifest.webmanifest`
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
