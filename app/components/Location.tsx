@@ -51,10 +51,10 @@ export default function Location() {
           
           {/* --- LEFT: Text Details --- */}
           <div className="order-2 lg:order-1">
-            <span className="loc-text block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-6">
+            <span className="loc-text block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-6 text-center md:text-left">
               Getting Here
             </span>
-            <h2 className="loc-text text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900 mb-8">
+            <h2 className="loc-text text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900 mb-8 text-center md:text-left">
               Hidden in the hills, <br />
               <span className="font-serif italic text-stone-500">yet easy to find.</span>
             </h2>
