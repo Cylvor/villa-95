@@ -9,7 +9,7 @@ const destinations = [
     id: 1,
     name: "Knuckles Five Peaks",
     description: "Iconic mountain range with breathtaking peaks and trails.",
-    image: "/Images/Destinations/Five_Peaks.webp",
+    image: "/Images/Destinations/Five_Peaks1.webp",
     category: "HIKING",
   },
   {

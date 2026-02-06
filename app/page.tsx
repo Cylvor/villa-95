@@ -15,7 +15,7 @@ import Reviews from "./components/Reviews";
 import FAQ from "./components/FAQ";
 import RoomTypes from "./components/RoomTypes";
 import Bar from "./components/Bar";
-import { MessageCircle } from "lucide-react";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -75,7 +75,13 @@ export default function Home() {
           <div className="absolute inset-2 rounded-full bg-green-500 animate-ping opacity-75"></div>
           {/* Main button */}
           <div className="relative flex items-center justify-center h-14 w-14 rounded-full bg-green-500 hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-110">
-            <MessageCircle className="h-7 w-7 text-white" fill="white" />
+            <Image
+              src="/logo/whatsapp.png"
+              alt="WhatsApp"
+              width={44}
+              height={44}
+              className="h-11 w-11"
+            />
           </div>
         </div>
       </a>

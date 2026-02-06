@@ -10,7 +10,6 @@ import {
   ExternalLink, 
   CheckCircle2, 
   ArrowLeft,
-  MessageCircle
 } from "lucide-react";
 
 export default function ReservationsPage() {
@@ -292,7 +291,13 @@ export default function ReservationsPage() {
         <div className="relative">
           <div className="absolute inset-2 rounded-full bg-green-500 animate-ping opacity-75"></div>
           <div className="relative flex items-center justify-center h-16 w-16 rounded-full bg-green-500 hover:bg-green-600 transition-all duration-300 shadow-2xl hover:shadow-green-500/50 hover:scale-110">
-            <MessageCircle className="h-8 w-8 text-white" fill="white" />
+            <Image
+              src="/logo/whatsapp.png"
+              alt="WhatsApp"
+              width={44}
+              height={44}
+              className="h-11 w-11"
+            />
           </div>
         </div>
       </a>

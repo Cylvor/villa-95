@@ -47,7 +47,7 @@ export default function Location() {
       className="relative w-full bg-stone-50 px-6 py-24 md:px-12 md:py-32 text-stone-900"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           
           {/* --- LEFT: Text Details --- */}
           <div className="order-2 lg:order-1">
