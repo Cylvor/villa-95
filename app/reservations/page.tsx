@@ -137,7 +137,9 @@ export default function ReservationsPage() {
               src={image}
               alt={`Villa 95 background ${index + 1}`}
               fill
-              className="object-cover"
+              className={`object-cover transition-transform duration-[7000ms] ease-out ${
+                index === currentImageIndex ? 'scale-110' : 'scale-100'
+              }`}
               priority={index === 0}
               quality={85}
             />
