@@ -73,7 +73,7 @@ export default function Footer() {
               <li className="pt-2">
                 <div className="flex gap-4">
                   <a
-                    href="#"
+                    href="https://www.instagram.com/villa95rangala?igsh=dDNpa2Zibnl0Z25j"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
@@ -82,7 +82,7 @@ export default function Footer() {
                     <Instagram className="h-4 w-4" />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.facebook.com/share/1G4qAb3f1x/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook"
