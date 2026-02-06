@@ -147,7 +147,7 @@ export default function Header() {
       {/* --- FULL SCREEN MOBILE MENU --- */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 z-[100] flex h-screen w-full flex-col items-center justify-center bg-stone-50 text-stone-900"
+        className="fixed inset-0 z-[100] flex h-screen w-full flex-col items-center justify-center bg-stone-50/90 md:bg-stone-50 text-stone-900"
         style={{ transform: "translateY(-100%)" }}
       >
         {/* CLOSE BUTTON (Inside the menu, Top Right) */}
