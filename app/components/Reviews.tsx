@@ -76,11 +76,19 @@ export default function Reviews() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeAward, setActiveAward] = useState<Award | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const swipeRef = useRef<{
+    pointerId: number | null;
+    startX: number;
+    startY: number;
+    startTime: number;
+    isHorizontal: boolean;
+  }>({
+    pointerId: null,
+    startX: 0,
+    startY: 0,
+    startTime: 0,
+    isHorizontal: false,
+  });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -162,6 +170,60 @@ export default function Reviews() {
     }
   };
 
+  const onSwipeStart = (e: React.PointerEvent<HTMLDivElement>) => {
+    // Only respond to primary button for mouse; touch/pen are fine.
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+
+    swipeRef.current.pointerId = e.pointerId;
+    swipeRef.current.startX = e.clientX;
+    swipeRef.current.startY = e.clientY;
+    swipeRef.current.startTime = performance.now();
+    swipeRef.current.isHorizontal = false;
+
+    // Helps ensure we keep receiving pointer events during a swipe.
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+
+  const onSwipeMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (swipeRef.current.pointerId !== e.pointerId) return;
+
+    const dx = e.clientX - swipeRef.current.startX;
+    const dy = e.clientY - swipeRef.current.startY;
+
+    // Decide gesture direction once the user has moved a bit.
+    if (!swipeRef.current.isHorizontal) {
+      const movedEnough = Math.abs(dx) > 8 || Math.abs(dy) > 8;
+      if (movedEnough) {
+        swipeRef.current.isHorizontal = Math.abs(dx) > Math.abs(dy);
+      }
+    }
+
+    // If it's a horizontal gesture, prevent page from interpreting it.
+    if (swipeRef.current.isHorizontal) {
+      e.preventDefault();
+    }
+  };
+
+  const onSwipeEnd = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (swipeRef.current.pointerId !== e.pointerId) return;
+
+    const dx = e.clientX - swipeRef.current.startX;
+    const elapsed = performance.now() - swipeRef.current.startTime;
+
+    swipeRef.current.pointerId = null;
+
+    // Ignore vertical scroll gestures.
+    if (!swipeRef.current.isHorizontal) return;
+
+    // Threshold: allow quick flicks with smaller distance.
+    const absDx = Math.abs(dx);
+    const shouldTrigger = absDx > 60 || (absDx > 30 && elapsed < 250);
+    if (!shouldTrigger) return;
+
+    if (dx < 0) nextSlide();
+    else prevSlide();
+  };
+
   return (
     <section
       id="reviews"
@@ -204,7 +266,13 @@ export default function Reviews() {
 
         {/* --- Slideshow Window --- */}
         {/* Added -mx-4 px-4 py-12 to Create Breathing Room for Shadows/Icons */}
-        <div className="overflow-hidden w-full mx-0 md:-mx-4 px-4 py-12">
+        <div
+          className="overflow-hidden w-full mx-0 md:-mx-4 px-4 py-12 touch-pan-y"
+          onPointerDown={onSwipeStart}
+          onPointerMove={onSwipeMove}
+          onPointerUp={onSwipeEnd}
+          onPointerCancel={onSwipeEnd}
+        >
             
             <div ref={sliderRef} className="flex w-full">
                 {reviews.map((review) => (
@@ -316,8 +384,8 @@ export default function Reviews() {
       </div>
 
       {/* --- Award Popup (portal so it's centered in viewport) --- */}
-      {isMounted &&
-        activeAward &&
+      {activeAward &&
+        typeof document !== "undefined" &&
         createPortal(
           <div
             className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 px-4"
