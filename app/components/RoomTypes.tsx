@@ -137,7 +137,9 @@ export default function RoomTypes() {
                           src={img}
                           alt={`${room.name} - View ${imgIndex + 1}`}
                           fill
-                          className="object-cover"
+                          className={`object-cover transition-transform duration-[6000ms] ease-out ${
+                            imgIndex === currentSlide[room.id] ? "scale-110" : "scale-100"
+                          }`}
                           priority={imgIndex === 0}
                         />
                       </div>

@@ -150,7 +150,9 @@ export default function Dining() {
                    src={img}
                    alt={`Dining Experience ${imgIndex + 1}`}
                    fill
-                   className="object-cover"
+                   className={`object-cover transition-transform duration-[6000ms] ease-out ${
+                     imgIndex === currentSlide ? "scale-110" : "scale-100"
+                   }`}
                    priority={imgIndex === 0}
                  />
                </div>
