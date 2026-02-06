@@ -99,7 +99,7 @@ export default function Header() {
               className={`group flex items-center gap-2 rounded-full px-5 py-2.5 transition-all ${
                 isScrolled
                   ? "bg-stone-900 text-white hover:bg-emerald-700"
-                  : "bg-white text-stone-900 hover:bg-stone-200"
+                  : "bg-white text-stone-900 hover:bg-emerald-700 hover:text-white"
               }`}
             >
               <span className="text-xs font-bold uppercase tracking-widest">
@@ -117,7 +117,7 @@ export default function Header() {
                 flex items-center gap-1 rounded-full px-4 py-2 transition-all shadow-sm
                 ${isScrolled
                     ? "bg-stone-900 text-white hover:bg-emerald-700"
-                    : "bg-white text-stone-900 hover:bg-stone-200"
+                    : "bg-white text-stone-900 hover:bg-emerald-700 hover:text-white"
                 }
               `}
             >

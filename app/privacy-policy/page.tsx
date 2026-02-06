@@ -32,14 +32,12 @@ export default function PrivacyPolicyPage() {
             >
               Back Home
             </Link>
-            <a
-              href="https://www.booking.com/hotel/lk/villa-95-kandy.html"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/reservations"
               className="hidden sm:inline-flex rounded-full bg-stone-900 px-5 py-2 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-emerald-700"
             >
               Book Now
-            </a>
+            </Link>
           </div>
         </div>
       </header>
