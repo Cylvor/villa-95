@@ -50,7 +50,7 @@ export default function Location() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           
           {/* --- LEFT: Text Details --- */}
-          <div className="order-2 lg:order-1">
+          <div className="order-1 lg:order-1">
             <span className="loc-text block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-6 text-center md:text-left">
               Getting Here
             </span>
@@ -111,7 +111,7 @@ export default function Location() {
           </div>
 
           {/* --- RIGHT: Map Embed --- */}
-          <div className="map-frame order-1 lg:order-2 h-[400px] md:h-[500px] w-full overflow-hidden rounded-2xl shadow-xl border border-stone-200 bg-stone-200 relative">
+          <div className="map-frame order-2 lg:order-2 h-[400px] md:h-[500px] w-full overflow-hidden rounded-2xl shadow-xl border border-stone-200 bg-stone-200 relative">
             <iframe
               width="100%"
               height="100%"
