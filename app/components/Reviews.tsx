@@ -172,7 +172,7 @@ export default function Reviews() {
         
         {/* --- Header with Navigation --- */}
         <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div className="max-w-xl">
+          <div className="max-w-xl text-center md:text-left">
              <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-4">
                Guest Stories
              </span>
@@ -277,7 +277,7 @@ export default function Reviews() {
         <div className="mt-14 flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
           {/* Left: Title */}
           <div className="flex-shrink-0">
-            <h3 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900">
+            <h3 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900 text-center md:text-left">
               Recognized by <br /> our guests.
             </h3>
           </div>

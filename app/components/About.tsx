@@ -79,10 +79,10 @@ export default function About() {
           <div className="lg:col-span-4">
             {/* CHANGED: top-10 -> top-32 to clear the fixed Header */}
             <div className="sticky top-32">
-              <span className="about-text block text-xs font-mono uppercase tracking-[0.2em] text-emerald-700 mb-4">
+              <span className="about-text block text-xs font-mono uppercase tracking-[0.2em] text-emerald-700 mb-4 text-center lg:text-left">
                 The Experience
               </span>
-              <h2 className="about-text text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900">
+              <h2 className="about-text text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900 text-center lg:text-left">
                 A home <br className="hidden lg:block" />
                 away from <br className="hidden lg:block" />
                 the noise.
@@ -97,7 +97,7 @@ export default function About() {
             {/* Narrative Text */}
             <div className="space-y-6 mb-20 max-w-2xl">
               <p className="about-text text-lg md:text-xl font-light leading-relaxed text-stone-600">
-                Villa 95 Rangala isn&apos;t just a hotel; it&apos;s a sanctuary in the clouds. 
+                Villa 95 Rangala isn&apos;t just a hotel, it&apos;s a sanctuary in the clouds. 
                 Experience spacious accommodations designed for families and couples alike, 
                 where every window frames a painting of the <span className="text-emerald-800 font-medium">Knuckles Mountain Range</span>.
               </p>

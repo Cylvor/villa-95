@@ -83,11 +83,11 @@ export default function Rooms() {
             "
           >
             {/* Header */}
-            <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-700 mb-6">
+            <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-700 mb-6 text-center md:text-left">
               The Sanctuary
             </span>
 
-            <h2 className="text-4xl md:text-6xl font-light leading-tight text-stone-900 mb-8">
+            <h2 className="text-4xl md:text-6xl font-light leading-tight text-stone-900 mb-8 text-center md:text-left">
               Apartment living, <br />
               <span className="font-serif italic text-stone-500">mountain soul.</span>
             </h2>

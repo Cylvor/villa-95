@@ -98,10 +98,10 @@ export default function Dining() {
           {/* --- LEFT: Text Content --- */}
           {/* REMOVED 'order-2' so this naturally sits on top in mobile */}
           <div>
-            <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-6">
+            <span className="block text-xs font-mono uppercase tracking-[0.2em] text-emerald-600 mb-6 text-center md:text-left">
               Culinary Journey
             </span>
-            <h2 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900 mb-8">
+            <h2 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-stone-900 mb-8 text-center md:text-left">
               Flavors of the world, <br />
               <span className="text-emerald-800 font-serif italic">served on the edge.</span>
             </h2>
