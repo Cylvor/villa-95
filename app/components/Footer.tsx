@@ -24,6 +24,7 @@ export default function Footer() {
                 width={480}
                 height={180}
                 priority
+                style={{ height: "auto" }}
                 className="h-auto w-72 md:w-80"
               />
             </a>

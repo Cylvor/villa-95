@@ -9,70 +9,70 @@ const destinations = [
     id: 1,
     name: "Knuckles Five Peaks",
     description: "Iconic mountain range with breathtaking peaks and trails.",
-    image: "/images/Destinations/Five_peaks.webp",
+    image: "/Images/Destinations/Five_Peaks.webp",
     category: "HIKING",
   },
   {
     id: 2,
     name: "Rangala Natural Pool",
     description: "Crystal-clear natural pool surrounded by lush greenery.",
-    image: "/images/Destinations/Rangala_Natural_Pool.webp",
+    image: "/Images/Destinations/Rangala_Natural_Pool.webp",
     category: "SWIMMING",
   },
   {
     id: 3,
     name: "Thunhisgala Peak",
     description: "Majestic mountain peak offering panoramic valley views.",
-    image: "/images/Destinations/Thunhisgala.webp",
+    image: "/Images/Destinations/Thunhisgala.webp",
     category: "HIKING",
   },
   {
     id: 4,
     name: "Meemure Village",
     description: "Traditional isolated village nestled deep in the Knuckles.",
-    image: "/images/Destinations/Meemure.webp",
+    image: "/Images/Destinations/Meemure.webp",
     category: "CULTURE",
   },
   {
     id: 5,
     name: "Jodu Falls",
     description: "A hidden double waterfall paradise for nature lovers.",
-    image: "/images/Destinations/Jodu_Falls.webp",
+    image: "/Images/Destinations/Jodu_Falls.webp",
     category: "WATERFALL",
   },
   {
     id: 6,
     name: "Saaree Falls",
     description: "Serene waterfall with pristine swimming spots.",
-    image: "/images/Destinations/Saree_Falls.webp",
+    image: "/Images/Destinations/Saree_Falls.webp",
     category: "WATERFALL",
   },
   {
     id: 7,
     name: "Huluganga Falls",
     description: "Powerful cascading waterfall in a scenic gorge.",
-    image: "/images/Destinations/Huluganga_Falls.webp",
+    image: "/Images/Destinations/Huluganga_Falls.webp",
     category: "WATERFALL",
   },
   {
     id: 8,
     name: "Heeloya Village",
     description: "Charming village offering an authentic rural experience.",
-    image: "/images/Destinations/Heeloya.webp",
+    image: "/Images/Destinations/Heeloya.webp",
     category: "CULTURE",
   },
   {
     id: 9,
     name: "Kotaganga Plains",
     description: "Expansive high-altitude plains with unique flora and fauna.",
-    image: "/images/Destinations/Kotaganga_Plains.webp",
+    image: "/Images/Destinations/Kotaganga_Plains.webp",
     category: "HIKING",
   },
   {
     id: 10,
     name: "Kotaganga Seven Falls",
     description: "A series of seven stunning waterfalls cascading through the wilderness.",
-    image: "/images/Destinations/Seven_Falls.webp",
+    image: "/Images/Destinations/Seven_Falls.webp",
     category: "WATERFALL",
   },
 ];
@@ -169,6 +169,7 @@ export default function Destinations() {
                                 src={item.image}
                                 alt={item.name}
                                 fill
+                              sizes="100vw"
                                 className="object-cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -204,6 +205,7 @@ export default function Destinations() {
                             src={destination.image}
                             alt={destination.name}
                             fill
+                          sizes="(min-width: 1024px) 58vw, 100vw"
                             className="object-cover"
                             priority={destination.id === 1}
                         />
