@@ -45,8 +45,8 @@ export default function TermsOfServicePage() {
       <main className="mx-auto max-w-5xl px-6 py-12 md:py-16">
         <div className="rounded-2xl border border-stone-200 bg-white p-6 md:p-10 shadow-sm">
           <p className="text-sm text-stone-600 leading-relaxed">
-            These Terms of Service ("Terms") govern your use of the Villa 95 Rangala website and your stay (or intended
-            stay) at Villa 95 Rangala ("Villa 95", "we", "us"), operated by A1 overseas consultants (pvt) ltd. By using
+            These Terms of Service (&quot;Terms&quot;) govern your use of the Villa 95 Rangala website and your stay (or intended
+            stay) at Villa 95 Rangala (&quot;Villa 95&quot;, &quot;we&quot;, &quot;us&quot;), operated by A1 overseas consultants (pvt) ltd. By using
             our website or making a reservation, you agree to these Terms.
           </p>
 

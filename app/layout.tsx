@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Merriweather } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll"; // Import the smooth scroll component
 import CustomCursor from "./components/CustomCursor";
-import { getSiteUrl } from "./lib/site";
+import { getConfiguredSiteUrl } from "./lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +22,7 @@ const merriweather = Merriweather({
 });
 
 export const metadata: Metadata = {
-  metadataBase: getSiteUrl(),
+  metadataBase: getConfiguredSiteUrl(),
   title: "Villa 95 | Rangala",
   description:
     "A private sanctuary above the clouds in the Knuckles Mountain Range, Sri Lanka.",
@@ -117,17 +117,6 @@ export const metadata: Metadata = {
       "A private sanctuary above the clouds in the Knuckles Mountain Range, Sri Lanka.",
   },
   manifest: "/manifest.webmanifest",
-  icons: {
-    icon: [
-      {
-        url: "/logo/favicon.png",
-        sizes: "any",
-        type: "image/png",
-      },
-    ],
-    shortcut: "/logo/favicon.png",
-    apple: "/logo/logo.png",
-  },
 };
 
 export default function RootLayout({

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MapPin, Navigation, Clock, Car } from "lucide-react";
+import { Car, MapPin, Navigation } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -2,27 +2,27 @@
 
 import { useEffect, useState } from "react";
 
+function computeCursorDisabled(): boolean {
+  if (typeof window === "undefined") return false;
+
+  const isTouchDevice =
+    "ontouchstart" in window ||
+    (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+    window.matchMedia?.("(pointer: coarse)")?.matches;
+
+  const smallScreen = window.innerWidth <= 768;
+
+  return Boolean(isTouchDevice || smallScreen);
+}
+
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(() => computeCursorDisabled());
 
   useEffect(() => {
-    // detect touch devices or small screens and disable custom cursor
-    const isTouchDevice = () =>
-      typeof window !== "undefined" && (
-        "ontouchstart" in window ||
-        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
-        window.matchMedia?.("(pointer: coarse)")?.matches
-      );
-
-    const smallScreen = () => typeof window !== "undefined" && window.innerWidth <= 768;
-
-    if (isTouchDevice() || smallScreen()) {
-      setDisabled(true);
-      return;
-    }
+    if (disabled) return;
 
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
@@ -49,6 +49,21 @@ export default function CustomCursor() {
       window.removeEventListener("mousemove", updatePosition);
       document.removeEventListener("mouseleave", hideCursor);
       document.removeEventListener("mouseenter", showCursor);
+    };
+  }, [disabled]);
+
+  useEffect(() => {
+    const onResize = () => {
+      const next = computeCursorDisabled();
+      setDisabled((prev) => (prev === next ? prev : next));
+    };
+
+    window.addEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onResize);
     };
   }, []);
 

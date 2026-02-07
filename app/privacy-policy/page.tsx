@@ -45,7 +45,7 @@ export default function PrivacyPolicyPage() {
       <main className="mx-auto max-w-5xl px-6 py-12 md:py-16">
         <div className="rounded-2xl border border-stone-200 bg-white p-6 md:p-10 shadow-sm">
           <p className="text-sm text-stone-600 leading-relaxed">
-            This Privacy Policy explains how Villa 95 Rangala ("Villa 95", "we", "us")—operated by A1
+            This Privacy Policy explains how Villa 95 Rangala (&quot;Villa 95&quot;, &quot;we&quot;, &quot;us&quot;)—operated by A1
             overseas consultants (pvt) ltd—collects, uses, shares, and protects personal information when
             you visit our website, contact us, or make a reservation.
           </p>

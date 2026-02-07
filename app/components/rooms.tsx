@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Wind, Coffee, Maximize, Sun, Waves, ArrowRight, BedDouble, Bath } from "lucide-react";
+import { Bath, BedDouble, Coffee, Maximize, Sun, Waves, Wind } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +20,7 @@ export default function Rooms() {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
 
     // --- DESKTOP ANIMATION ONLY (>768px) ---
     mm.add("(min-width: 768px)", () => {

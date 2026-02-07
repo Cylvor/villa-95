@@ -37,7 +37,7 @@ export default function Dining() {
   }, [isAutoPlaying]);
 
   useEffect(() => {
-    let mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
 
     // Only run parallax on desktop to save mobile performance
     mm.add("(min-width: 768px)", () => {

@@ -1,9 +1,25 @@
 import type { MetadataRoute } from "next";
 
+import { headers } from "next/headers";
+
 import { getSiteUrl } from "./lib/site";
 
-export default function manifest(): MetadataRoute.Manifest {
-  const siteUrl = getSiteUrl();
+export const dynamic = "force-dynamic";
+
+async function getOriginFromRequestHeaders(): Promise<URL> {
+  const h = await headers();
+  const forwardedProto = h.get("x-forwarded-proto");
+  const forwardedHost = h.get("x-forwarded-host");
+  const host = forwardedHost ?? h.get("host");
+  const proto = forwardedProto ?? "https";
+
+  if (host) return new URL(`${proto}://${host}`);
+
+  return getSiteUrl();
+}
+
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const siteUrl = await getOriginFromRequestHeaders();
 
   return {
     name: "Villa 95 | Rangala",

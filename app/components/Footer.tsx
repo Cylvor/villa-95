@@ -17,7 +17,7 @@ export default function Footer() {
           
           {/* Brand Column (Span 4) */}
           <div className="md:col-span-4 space-y-6 flex flex-col items-center">
-            <a href="/" aria-label="Villa 95 Home" className="inline-flex">
+            <Link href="/" aria-label="Villa 95 Home" className="inline-flex">
               <Image
                 src="/logo/logo.png"
                 alt="Villa 95"
@@ -27,7 +27,7 @@ export default function Footer() {
                 style={{ height: "auto" }}
                 className="h-auto w-72 md:w-80"
               />
-            </a>
+            </Link>
             <p className="text-sm leading-relaxed text-stone-500 text-center">
               A1 overseas consultants (pvt) ltd
             </p>

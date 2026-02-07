@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Plus, Minus, HelpCircle } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -115,6 +115,29 @@ export default function FAQ() {
 function AccordionItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [contentHeight, setContentHeight] = useState(0);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const el = contentRef.current;
+    if (!el) return;
+
+    setContentHeight(el.scrollHeight);
+  }, [isOpen, answer]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const onResize = () => {
+      const el = contentRef.current;
+      if (!el) return;
+      setContentHeight(el.scrollHeight);
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [isOpen]);
 
   return (
     <div className="faq-item border-b border-stone-200 last:border-0">
@@ -138,7 +161,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
       <div
         ref={contentRef}
         style={{
-            height: isOpen ? contentRef.current?.scrollHeight : 0,
+            height: isOpen ? contentHeight : 0,
             opacity: isOpen ? 1 : 0
         }}
         className="overflow-hidden transition-all duration-500 ease-in-out"

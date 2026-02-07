@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Wine, Music, Sunset, Sparkles } from "lucide-react";
+import { Music, Sunset, Wine } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,7 +80,15 @@ export default function Bar() {
 }
 
 // Helper Component - Styled for Light Theme
-function Feature({ icon: Icon, title, desc }: { icon: any, title: string, desc: string }) {
+function Feature({
+  icon: Icon,
+  title,
+  desc,
+}: {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+}) {
   return (
     <div className="flex flex-col items-center rounded-lg border border-stone-200/60 bg-white/80 p-4 shadow-sm transition-all hover:border-emerald-500 hover:shadow-md">
       <Icon className="mb-3 h-5 w-5 text-emerald-600" />
