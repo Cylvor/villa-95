@@ -28,11 +28,17 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
       "A private sanctuary above the clouds in the Knuckles Mountain Range, Sri Lanka.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0c0a09",
-    theme_color: "#0c0a09",
+    background_color: "#ffffff",
+    theme_color: "#ffffff",
     icons: [
       {
-        src: "/logo/logo.png",
+        src: "/favicon/web-app-manifest-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "maskable",
+      },
+      {
+        src: "/favicon/web-app-manifest-512x512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",

@@ -26,6 +26,15 @@ export const metadata: Metadata = {
   title: "Villa 95 | Rangala",
   description:
     "A private sanctuary above the clouds in the Knuckles Mountain Range, Sri Lanka.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon/favicon.ico" },
+      { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+    shortcut: "/favicon/favicon.ico",
+    apple: "/favicon/apple-touch-icon.png",
+  },
   keywords: [
     "Villa 95",
     "Villa 95 Rangala",
@@ -130,7 +139,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${merriweather.variable} antialiased`}
       >
         <CustomCursor />
-        <SmoothScroll /> {/* Initializes the smooth scroll logic */}
+        <SmoothScroll />
         {children}
       </body>
     </html>

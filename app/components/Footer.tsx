@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="md:col-span-4 space-y-6 flex flex-col items-center">
             <Link href="/" aria-label="Villa 95 Home" className="inline-flex">
               <Image
-                src="/logo/logo.png"
+                src="/logo/footerimage.png"
                 alt="Villa 95"
                 width={480}
                 height={180}

@@ -69,7 +69,7 @@ export default function Hero() {
       {/* --- CENTER: The "Sanctuary" Statement --- */}
       <div className="hero-center absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
         
-        <span className="mb-4 text-xs font-mono uppercase tracking-[0.4em] text-white-40">
+        <span className="mb-4 text-xs font-mono uppercase tracking-[0.4em] text-white/40">
           Welcome to the
         </span>
         
