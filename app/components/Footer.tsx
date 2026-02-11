@@ -61,8 +61,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 shrink-0 text-emerald-600" />
-                <a href="mailto:info@villa95.com" className="hover:text-white transition-colors">
-                  info@villa95.com
+                <a href="mailto:a1overseasconsultants01@gmail.com" className="hover:text-white transition-colors">
+                  a1overseasconsultants01@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
@@ -131,7 +131,7 @@ export default function Footer() {
             <span className="hidden md:block text-stone-800">|</span>
 
             <p className="font-medium text-stone-500">
-               Designed by <span className="text-stone-300 font-bold hover:text-emerald-500 transition-colors cursor-default">Cylvor IT</span>
+              Designed by <a href="https://cylvorit.com" target="_blank" rel="noopener noreferrer" className="text-stone-300 font-bold hover:text-emerald-500 transition-colors">Cylvor IT</a>
             </p>
           </div>
 
