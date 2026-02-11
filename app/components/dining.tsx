@@ -9,7 +9,7 @@ import { Utensils, Wine, Sun, ChefHat, ChevronLeft, ChevronRight } from "lucide-
 gsap.registerPlugin(ScrollTrigger);
 
 const diningFeatures = [
-  { icon: Utensils, label: "Global Cuisine", desc: "Chinese, Indian & Western" },
+  { icon: Utensils, label: "Global Cuisine", desc: "Sri Lankan, Chinese, Indian & Western" },
   { icon: Sun, label: "Open Terrace", desc: "Breakfast with a view" },
   { icon: Wine, label: "The Bar", desc: "Beer & Evening Drinks" },
   { icon: ChefHat, label: "Freshly Prepared", desc: "Made to order daily" },
