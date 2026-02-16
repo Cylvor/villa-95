@@ -5,6 +5,7 @@ import Rooms from "./components/rooms";
 import Destinations from "./components/Destinations";
 import Footer from "./components/Footer";
 import Gallery from "./components/Gallery";
+import GuestDiaries from "./components/GuestDiaries";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import HouseRules from "./components/HouseRules";
@@ -44,6 +45,9 @@ export default function Home() {
         </SectionReveal>
         <SectionReveal>
           <Gallery />
+        </SectionReveal>
+        <SectionReveal>
+          <GuestDiaries />
         </SectionReveal>
         <SectionReveal>
           <Destinations />
