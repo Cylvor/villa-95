@@ -17,9 +17,9 @@ export default function Footer() {
           
           {/* Brand Column (Span 4) */}
           <div className="md:col-span-4 space-y-6 flex flex-col items-center">
-            <Link href="/" aria-label="Villa 95 Home" className="inline-flex">
+            <a href="/" aria-label="Villa 95 Home" className="inline-flex">
               <Image
-                src="/logo/footerimage.png"
+                src="/logo/logo.png"
                 alt="Villa 95"
                 width={480}
                 height={180}
@@ -27,7 +27,7 @@ export default function Footer() {
                 style={{ height: "auto" }}
                 className="h-auto w-72 md:w-80"
               />
-            </Link>
+            </a>
             <p className="text-sm leading-relaxed text-stone-500 text-center">
               A1 overseas consultants (pvt) ltd
             </p>
@@ -131,7 +131,7 @@ export default function Footer() {
             <span className="hidden md:block text-stone-800">|</span>
 
             <p className="font-medium text-stone-500">
-              Designed by <a href="https://cylvorit.com" target="_blank" rel="noopener noreferrer" className="text-stone-300 font-bold hover:text-emerald-500 transition-colors">Cylvor IT</a>
+               Designed by <span className="text-stone-300 font-bold hover:text-emerald-500 transition-colors cursor-default">Cylvor IT</span>
             </p>
           </div>
 
