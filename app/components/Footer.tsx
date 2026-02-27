@@ -131,7 +131,15 @@ export default function Footer() {
             <span className="hidden md:block text-stone-800">|</span>
 
             <p className="font-medium text-stone-500">
-               Designed by <span className="text-stone-300 font-bold hover:text-emerald-500 transition-colors cursor-default">Cylvor IT</span>
+               Designed by {" "}
+               <a
+                 href="https://cylvorit.com/"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="text-stone-300 font-bold hover:text-emerald-500 transition-colors"
+               >
+                 Cylvor IT
+               </a>
             </p>
           </div>
 
